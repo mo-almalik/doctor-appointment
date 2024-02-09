@@ -1,8 +1,9 @@
+import { jwtDecode } from "jwt-decode";
 
 // حفظ التوكن ودور المستخدم في localStorage
-export const saveAuthData = (token, role) => {
+export const saveAuthData = (token) => {
     localStorage.setItem('authToken', token);
-    localStorage.setItem('userRole', role);
+  
   };
   
   // استرجاع التوكن من localStorage
@@ -10,15 +11,18 @@ export const saveAuthData = (token, role) => {
      return localStorage.getItem('authToken');
   };
   
-  // استرجاع دور المستخدم من localStorage
-  export const getUserRole = () => {
-    return localStorage.getItem('userRole');
-  };
+  export const userRole = ()=>{
+    let token = getToken()
+    const Token =  token.split(' ')[1]
+   const decoded = jwtDecode(Token)
+   const userRole = decoded.role 
+ return userRole
+  }
   
   // حذف التوكن ودور المستخدم من localStorage
   export const removeAuthData = () => {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
+  
   };
   
   // التحقق من وجود التوكن
