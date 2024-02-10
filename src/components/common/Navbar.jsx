@@ -1,37 +1,41 @@
 import React from 'react'
-import { TbBaselineDensityMedium } from "react-icons/tb";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import logo from '../../logo.svg'
-
+import { FcWorkflow } from "react-icons/fc";
 export default function Navbar() {
+  const menu = [
+    {path:"/" , title :'الرئيسية'},
+    {path:"/" , title :'الخدمات'},
+    {path:"/aboutus" , title :'من نحن'},
+    {path:"/doctorList" , title :' الدكاترة'},
+    {path:"/contact" , title :'اتصل بنا'},
+ 
+  ]
   return <>
-    <nav className='bg-slate-100'>
-      <div className="container flex  max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div className="flex md:flex-1 mx-auto">
-          <Link to="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src={logo} alt="" />
-          </Link>
-        </div>
-        <div className='flex justify-center sm:hidden '> 
-          <Link to={'/'} className='mx-3 text-gray-500 '>home</Link>
-          <Link to={'/'} className='mx-3 text-gray-500 '>home</Link>
-          <Link to={'/'} className='mx-3 text-gray-500 '>home</Link>
-          <Link to={'/'} className='mx-3 text-gray-500 '>home</Link>
-          <Link to={'/'} className='mx-3 text-gray-500 '>home</Link>
-        </div>
-        <div className="flex lg:hidden md:hidden 2xl:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-
-          >
-            <span className="sr-only">Open main menu</span>
-            <TbBaselineDensityMedium />
-
-          </button>
+    <div className='  py-4'>
+      <div className='container m-auto'>
+        <div className='flex justify-between items-center'>
+          <div className='flex items-center font-bold text-main'> <img src={logo} alt='logo' className='ml-2 w-10' /> عافية</div>
+          <div className='flex em:hidden sm:hidden '>
+            {menu.map((link ,index) => <>
+              <Link to={link.path} >
+            
+              <li key={index} className={`flex justify-center items-center mx-2 p-3 ${index === 0 && ' text-main'} hover:text-main duration-200`}>
+                {link.title}
+               </li>
+         
+               
+                
+              </Link>
+            </>)}
+          </div>
+          <div>
+            <button className='w-28 h-10 em:w-20 em:text-sm bg-mainlight rounded-md text-main hover:text-mainlight hover:bg-main hover:duration-300 duration-300'>حجز الأن</button>
+          </div>
+          
         </div>
       </div>
-    </nav>
+    </div>
+    
   </>
 }
