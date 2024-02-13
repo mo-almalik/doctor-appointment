@@ -59,11 +59,21 @@ UserAddAppointment() {
     setLoading(true)
      const response  = await api.get(`/time/${id}`).catch((error)=>console.log(setError(error.response?.data?.message)))
      setAvailable(response?.data.data);
-    setLoading(false)
-   
-     
-      
+    setLoading(false) 
    }
+
+
+   const daysAr = {
+    Monday: 'الإثنين',
+    Tuesday: 'الثلاثاء',
+    Wednesday: 'الأربعاء',
+    Thursday: 'الخميس',
+    Friday: 'الجمعة',
+    Saturday: 'السبت',
+    Sunday: 'الأحد',
+  };
+  
+
   useEffect(()=>{
     getDays(id)
   },[])
@@ -154,8 +164,8 @@ UserAddAppointment() {
                      className={` ${ selectedSlot === day ? 'bg-main rounded-md cursor-pointer text-white transition duration-500' : 'bg-light rounded-md cursor-pointer'  }`}>
                    <div className="bg-main w-full rounded-md shadow-sm ">
                   <div className="px-2 text-center py-2">
-                  <span className="text-md text-white "  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange} >{day.day} </span>
+                  <span className="text-sm text-white "  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange} >{daysAr[day.day]} </span>
                   </div>
                    </div>
 

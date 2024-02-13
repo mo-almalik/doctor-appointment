@@ -24,15 +24,13 @@ export default function UserDoctorList() {
   </Helmet>
      <div className='my-10 container m-auto '>
     <div className='grid grid-cols-4 gap-5 '>
-      {doctor.slice(0,4).map((item ,index)=><>
-     
-      <Link to={`/doctor/${item._id}`} key={index} >
+      {doctor.slice(0,4).map((item ,index)=><Link to={`/doctor/${item._id}`} key={index} >
       <div className='h-fit bg-gray-300  rounded-lg text-center'>
        <img src={doct1} alt={item.name}  className='w-full rounded-lg'/>
        <h4 className='py-3 text-gray-700'> {item.name}</h4>
         </div>
       </Link>
-      </>)}
+      )}
     </div>
    </div>
   </>

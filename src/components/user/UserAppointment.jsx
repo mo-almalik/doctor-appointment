@@ -47,8 +47,7 @@ export default function UserAppointment() {
   <tbody className='border border-gray-300 text-sm '>
 
   {appointment ? <>
-      {appointment.map((item,index)=> <>
-        <tr key={index}>
+      {appointment.map((item,index)=> <tr key={index}>
       <td className='py-2 border-s-2  border-gray-100  border-b-2 px-5 w-[60px]'>#{item.visitNo}</td>
       <td className='py-2 border-s-2  border-gray-100  border-b-2'>{item.name}</td>
       <td className='py-2 border-s-2  border-gray-100  border-b-2'>{item.phone}</td>
@@ -62,7 +61,7 @@ export default function UserAppointment() {
         
       </td>
     </tr>
-      </>)}
+      )}
     </>: <h6>لاتوجد  مشاريع</h6>}
  
   </tbody>
