@@ -4,13 +4,17 @@ import doct1 from '../../Assets/image/doc1.jpg'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 export default function UserDoctorList() {
+ 
   const [doctor , setDoctors]= useState([])
-  
+ 
+
   const getDoctors= async()=>{
    const {data}= await api.get('/doctor/').catch((err)=>console.log(err))
    setDoctors(data?.data)
    console.log(doctor);
   }
+
+ 
   useEffect(()=>{
   getDoctors()
   },[])

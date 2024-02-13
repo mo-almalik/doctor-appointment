@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 import { saveAuthData, isAuthenticated } from "../../utils/auth.js";
 import api from "../../services/api.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const [error, setError] = useState(null);
-
+  let navigate =  useNavigate();
   let user = {
     email: "",
     password: "",
@@ -31,9 +31,10 @@ export default function Login() {
     // Log the data from the response
 
     if (data.success === true) {
-      const token = "Bearer " + data.token;
+      const token = 'Bearer ' +  data.token;
 
       saveAuthData(token);
+      navigate('/')
     }
   }
 

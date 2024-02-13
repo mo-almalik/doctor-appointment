@@ -3,6 +3,7 @@ import { TbArrowNarrowLeft } from "react-icons/tb";
 import api from '../../services/api.js';
 import { Link } from 'react-router-dom';
 import doct1 from '../../Assets/image/doc2.jpg'
+import { Helmet } from 'react-helmet';
 export default function UserHome() {
   const [doctor , setDoctors]= useState([])
   
@@ -15,6 +16,9 @@ export default function UserHome() {
   getDoctors()
   },[])
   return <>
+  <Helmet>
+    <title>عافية</title>
+  </Helmet>
     <div className='container mx-auto bg-white bg-opacity-50 h-[500px] rounded-md mt-8 em:text-center'>
         <div className='flex justify-center items-center w-full h-full em:flex-col sm:flex-col'>
           <div className=' w-1/2 em:w-full sm:w-full'>
@@ -33,12 +37,12 @@ export default function UserHome() {
             <input placeholder=' اكتب اسم الدكتور/المركز/ المستشفى هنا...' name='' className='w-full p-3 rounded-md focus:outline-none' />
             <div className='grid grid-cols-2 my-3 gap-2 em:grid-cols-1'>
               <select className='w-full p-3 rounded-md focus:outline-none text-gray-400'>
-                <option selected>المدينة</option>
+                <option defaultValue>المدينة</option>
                 <option>12</option>
                 <option>12</option>
               </select>
               <select className='w-full p-3 rounded-md focus:outline-none text-gray-400'>
-                <option selected>التخصص</option>
+                <option disabled>التخصص</option>
                 <option>12</option>
                 <option>12</option>
               </select>
@@ -54,15 +58,14 @@ export default function UserHome() {
       <h4 className='mb-7 text-md font-semibold text-main-400'>الاطباء المميزين</h4>
 
       <div className='grid grid-cols-4 gap-5 '>
-      {doctor.slice(0,4).map((item ,index)=><>
-     
-      <Link to={`/doctor/${item._id}`} key={index} >
+      {doctor.slice(0,4).map((item ,index)=>(
+        <Link to={`/doctor/${item._id}`} key={item._id} >
       <div className='h-fit bg-white  rounded-lg text-center p-5'>
        <img src={doct1} alt={item.name}  className='w-full rounded-lg'/>
        <h4 className='py-3 text-gray-700'> {item.name}</h4>
         </div>
       </Link>
-      </>)}
+      ))}
     </div>
     </div>
   
