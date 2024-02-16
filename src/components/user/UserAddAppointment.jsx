@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Link, useParams } from "react-router-dom";
 import api from "../../services/api.js";
 import { toast } from 'react-toastify';
-import { isAuthenticated } from "../../utils/auth.js";
+import { isAuthenticated, userRole } from "../../utils/auth.js";
 import Loading from "../../utils/Loading.jsx";
 export default function 
 UserAddAppointment() {
@@ -13,7 +13,7 @@ UserAddAppointment() {
   const [available ,setAvailable] = useState([])
   const [selectedSlot, setSelectedSlot] = useState(null);
 
- 
+  const Role = userRole()
   
   const { id } = useParams();
   
@@ -42,9 +42,6 @@ UserAddAppointment() {
         
       });
       setLoading(false)
-   
-   
-      
         toast.success(data.message)
         setLoading(false)
       
@@ -73,11 +70,20 @@ UserAddAppointment() {
     Sunday: 'الأحد',
   };
   
+  console.log(available);
+  // const delayedLoading = () => {
+   
+  //   setTimeout(() => {
+  //     setLoading(true);
+  //   }, 6000);
+  // };
 
   useEffect(()=>{
     getDays(id)
+   
   },[])
 
+ 
   return (
     <>
       <h5 className="bg-main text-white p-5 text-center rounded-md shadow-md shadow-main-50 mb-5">
@@ -158,7 +164,8 @@ UserAddAppointment() {
               </> : <>
               <div className="flex justify-center items-center gap-5 my-3 ">
              <div> {error ? error : ''}</div>
-                {available.map((day,index)=>
+                
+                  {available.map((day,index)=>
                     <div key={index} 
                      onClick={() => setSelectedSlot(day)}
                      className={` ${ selectedSlot === day ? 'bg-main rounded-md cursor-pointer text-white transition duration-500' : 'bg-light rounded-md cursor-pointer'  }`}>
@@ -175,35 +182,42 @@ UserAddAppointment() {
                      </div>
                     </div>
                  )}
+               
                 </div>
-                {formik.errors.time && formik.touched.time ? (
-                <div className="text-red-500 text-sm py-1 rounded-md my-2 px-2">
-                  {formik.errors.time}
-                </div>
-              ) : (
-                ""
-              )}
+               
               </>}
         </div>
-        {isAuthenticated() ? <>
         {loading ? <>
           <button className="bg-main rounded-md text-white w-full p-4" >
            <Loading />
         </button>
-        </> : <>
+        </>:<>
+        {isAuthenticated() &&  Role !== 'doctor' ? <>
+      
+      {available.length > 0 ? <>
         <button className="bg-main rounded-md text-white w-full p-4" type="submit">
-          حجز
-        </button>
-        </>}
-          
+        حجز
+      </button>
+      </> :<>
+     
+      <h5>لاتوجد مواعيد متاحة</h5>
+      </>}
+    
+        
+      </> :<>
+      <Link to={'/login'} >
+      <button  className="bg-main rounded-md text-white w-[100%]  p-4 bg-opacity-50 cursor-pointer"  disabled={Role === 'doctor'} >
+    
+        {Role === 'doctor' ? <>
+          ليس لديك صلاحية للحجز
         </> :<>
-        <Link to={'/login'} >
-        <button  className="bg-main rounded-md text-white w-[100%]  p-4 bg-opacity-50 cursor-pointer">
-
-          تسجيل الدخول للحجز
-        </button>
-        </Link>
+        تسجيل الدخول للحجز
         </>}
+      </button>
+      </Link>
+      </>}
+        </>}
+        
       </form>
     </>
   );

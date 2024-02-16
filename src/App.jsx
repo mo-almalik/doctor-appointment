@@ -13,13 +13,15 @@ import DoctorHome from './components/doctor/DoctorHome.jsx';
 import UserDoctorList from './components/user/UserDoctorList.jsx';
 import UserAppointment from './components/user/UserAppointment.jsx';
 import UserDoctorDetails from './components/user/UserDoctorDetails.jsx';
-import UserAddAppointment from './components/user/UserAddAppointment.jsx';
+
 import {DoctorRouter,UserRouter,AdminRouter} from './utils/ProtectedRouter.js';
 import UserAppointmentDetails from './components/user/UserAppointmentDetails.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getToken, userRole } from './utils/auth.js';
+import { getToken } from './utils/auth.js';
 import { useEffect } from 'react';
+import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
+import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
 
 
 let Routers =createBrowserRouter([
@@ -29,17 +31,18 @@ let Routers =createBrowserRouter([
     {path:'about' ,element:<UserAbout />},
     {path:'profile',element:<UserRouter><UserProfile /></UserRouter>},
     {path:'contact' , element: <UserContact />},
+    {path:'doctor/login' ,element:<DoctorLogin />},
     {path:'doctorList' , element:  <UserDoctorList />},
-    {path:'doctor/:id' ,element:<UserDoctorDetails />},
+    {path:'doctor/:id' ,element: <UserDoctorDetails />},
     {path:'all-appointment' ,element:<UserRouter><UserAppointment /></UserRouter>},
-    // {path:'new-appointment' ,element:<UserAddAppointment />},
     {path:'appointment/:id' ,element:<UserRouter><UserAppointmentDetails /></UserRouter>},
     
   ]},
 
   // doctor routers
   {path:'/cms',element: <DoctorRouter><DoctorLayout /></DoctorRouter> ,children:[
-    {index:true ,element:<DoctorHome />}
+    {index:true ,element:<DoctorHome />},
+    {path:'appointments' ,element:<DoctorAppointment/>}
   ]},
 
 

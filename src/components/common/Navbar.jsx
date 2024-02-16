@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../logo.svg'
-import { isAuthenticated, removeAuthData } from '../../utils/auth.js';
+import { isAuthenticated, removeAuthData, userRole } from '../../utils/auth.js';
 export default function Navbar() {
   let navigate =  useNavigate();
   const menu = [
@@ -10,6 +10,7 @@ export default function Navbar() {
     {path:"/aboutus" , title :'من نحن'},
     {path:"/doctorList" , title :' الدكاترة'},
     {path:"/contact" , title :'اتصل بنا'},
+    {path:"/doctor/login" , title :'انضم كطبيب  '},
   ]
   function Logout(){
     removeAuthData();
@@ -24,7 +25,7 @@ export default function Navbar() {
         <div className='flex justify-between items-center'>
           <div className='flex items-center font-bold text-main w-[10%]'> <img src={logo} alt='logo' className='ml-2 w-10' /> عافية</div>
           
-          {isAuthenticated() ? <>
+          {isAuthenticated() && userRole === 'user' ? <>
             <div className='flex justify-center  w-[80%] mx-auto gap-x-5 text-gray-500'>
               <Link to={'/'}>الرئيسية</Link>
               <Link to={'/all-appointment'}>حجوزاتي</Link>

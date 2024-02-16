@@ -1,10 +1,9 @@
 import React from 'react'
 
-export default function DoctorHome() {
+export default function DoctorRegister() {
   return (
     <div>
-      DoctorHome
-     
+      
     </div>
   )
 }

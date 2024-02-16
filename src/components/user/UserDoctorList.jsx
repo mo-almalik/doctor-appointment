@@ -26,8 +26,8 @@ export default function UserDoctorList() {
     <div className='grid grid-cols-4 gap-5 '>
       {doctor.slice(0,4).map((item ,index)=><Link to={`/doctor/${item._id}`} key={index} >
       <div className='h-fit bg-gray-300  rounded-lg text-center'>
-       <img src={doct1} alt={item.name}  className='w-full rounded-lg'/>
-       <h4 className='py-3 text-gray-700'> {item.name}</h4>
+       <img src={doct1} alt={item.username}  className='w-full rounded-lg'/>
+       <h4 className='py-3 text-gray-700'> {item.username}</h4>
         </div>
       </Link>
       )}

@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import { saveAuthData, isAuthenticated } from "../../utils/auth.js";
-import api from "../../services/api.js";
+import { saveAuthData, isAuthenticated } from "../../../utils/auth.js";
+import api from "../../../services/api.js";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/common/Navbar.jsx";
-export default function Login() {
+
+export default function DoctorLogin() {
   const [error, setError] = useState(null);
   let navigate =  useNavigate();
   let user = {
@@ -26,7 +26,7 @@ export default function Login() {
   });
 
   async function Login(userData) {
-    let { data } = await api.post("/auth/login", userData).catch((error) => {
+    let { data } = await api.post("/auth/doctor/login", userData).catch((error) => {
       setError(error.response.data.message);
     });
     // Log the data from the response
@@ -35,7 +35,7 @@ export default function Login() {
       const token = 'Bearer ' +  data.token;
 
       saveAuthData(token);
-      navigate('/')
+      navigate('/cms')
     }
   }
 
@@ -45,7 +45,7 @@ export default function Login() {
     onSubmit: Login,
   });
   return <>
-    <Navbar />
+   
     <div className="flex justify-center items-center container w-full mx-auto bg-gray-100 shadow-sm rounded-lg py-5 my-5 gap-4">
       {isAuthenticated() ? (
         <>

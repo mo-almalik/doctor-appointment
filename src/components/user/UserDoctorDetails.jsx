@@ -29,7 +29,7 @@ const [loading ,setLoading] = useState(false)
   
   return <>
   <Helmet>
-    <title> د/ {doctor.name ? doctor.name : ''}</title>
+    <title> د/ {doctor.username ? doctor.username : ''}</title>
   </Helmet>
    
       <div className='container mx-auto w-full mt-6'>
@@ -37,20 +37,14 @@ const [loading ,setLoading] = useState(false)
      
         <div className='w-full'>
           
-{/*           
-            <div className='bg-white my-5 p-5 py-10 rounded-md '> 
-             <div className='flex justify-center items-center'>
-              <TbLoader className='animate-spin' />
-              </div>
-            </div>
-             */}
+
          
           <div className='bg-white my-5 p-5 rounded-md '> 
             <div className='flex justify-between items-center'>
             {loading ? <>
               <TbLoader className='animate-spin' />
             </> :<>
-            <h3>د/ {doctor.name}</h3>
+            <h3>د/ {doctor.username}</h3>
             {doctor.status === 'online' ?  <span className='text-sm bg-green-200 bg-opacity-55 p-3 rounded-md text-green-700'>متصل الان</span> : ''}
             </>}
              

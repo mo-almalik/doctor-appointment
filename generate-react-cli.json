@@ -7,10 +7,10 @@
   "component": {
     "default": {
       "customTemplates": {
-        "component": "UserTemplateName.jsx"
+        "component": "DoctorTemplateName.jsx"
        
       },
-      "path": "src/components/user",
+      "path": "src/components/doctor",
       "withStyle": false,
       "withTest": false,
       "withStory": false,
