@@ -22,6 +22,8 @@ import { getToken } from './utils/auth.js';
 import { useEffect } from 'react';
 import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
 import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
+import DoctorUpdateAccount from './components/doctor/DoctorUpdateAccount.jsx';
+import DoctorAccount from './components/doctor/DoctorAccount.jsx';
 
 
 let Routers =createBrowserRouter([
@@ -42,7 +44,10 @@ let Routers =createBrowserRouter([
   // doctor routers
   {path:'/cms',element: <DoctorRouter><DoctorLayout /></DoctorRouter> ,children:[
     {index:true ,element:<DoctorHome />},
-    {path:'appointments' ,element:<DoctorAppointment/>}
+    {path:'appointments' ,element:<DoctorAppointment/>},
+    {path:'account' ,element:<DoctorAccount/> ,children:[
+      {path:'update' ,element:<DoctorUpdateAccount/>},
+    ]},
   ]},
 
 

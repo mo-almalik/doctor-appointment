@@ -21,6 +21,15 @@ export const saveAuthData = (token) => {
    }
 
   }
+  export const user =()=>{
+    let token = getToken()
+   if(token !== null && token !== undefined){
+    const Token =  token.split(' ')[1] 
+   const decoded = jwtDecode(Token)
+   const user = decoded
+ return user
+   }
+  }
   // حذف التوكن ودور المستخدم من localStorage
   export const removeAuthData = () => {
     localStorage.removeItem('authToken');
