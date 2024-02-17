@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import logo from '../../logo.svg'
 import { isAuthenticated, removeAuthData, userRole } from '../../utils/auth.js';
+import { useAuth } from '../../Context/auth.js';
 export default function Navbar() {
-  let navigate =  useNavigate();
+  
+  const {logout} = useAuth()
   const menu = [
     {path:"/" , title :'الرئيسية'},
     {path:"/" , title :'الخدمات'},
@@ -13,10 +15,10 @@ export default function Navbar() {
     {path:"/doctor/login" , title :'انضم كطبيب  '},
   ]
   function Logout(){
-    removeAuthData();
+    logout();
     
  
-   navigate('/login')
+   return redirect('/login')
 }
 
   return <>

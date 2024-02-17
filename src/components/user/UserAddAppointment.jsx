@@ -70,17 +70,9 @@ UserAddAppointment() {
     Sunday: 'الأحد',
   };
   
-  console.log(available);
-  // const delayedLoading = () => {
-   
-  //   setTimeout(() => {
-  //     setLoading(true);
-  //   }, 6000);
-  // };
 
   useEffect(()=>{
     getDays(id)
-   
   },[])
 
  

@@ -32,7 +32,7 @@ export default function DoctorLayout() {
 
         <div className="flex flex-col  w-full h-screen overflow-y-auto scrollbar-thin">
           <div className="container mx-auto">
-            <div className="bg-white shadow-md h-10 leading-10 w-full px-5 mb-5">
+            <div className="">
               <Header />
             </div>
             <Outlet />

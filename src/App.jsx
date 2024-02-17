@@ -24,6 +24,11 @@ import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
 import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
 import DoctorUpdateAccount from './components/doctor/DoctorUpdateAccount.jsx';
 import DoctorAccount from './components/doctor/DoctorAccount.jsx';
+import DoctorTimes from './components/doctor/DoctorTimes.jsx';
+import DoctorSetting from './components/doctor/DoctorSetting.jsx';
+import DoctorPatients from './components/doctor/DoctorPatients.jsx';
+import DoctorSuport from './components/doctor/DoctorSuport.jsx';
+import DoctorAccounting from './components/doctor/DoctorAccounting.jsx';
 
 
 let Routers =createBrowserRouter([
@@ -47,7 +52,13 @@ let Routers =createBrowserRouter([
     {path:'appointments' ,element:<DoctorAppointment/>},
     {path:'account' ,element:<DoctorAccount/> ,children:[
       {path:'update' ,element:<DoctorUpdateAccount/>},
-    ]},
+      
+    ]}, 
+    {path:'times' ,element:<DoctorTimes/>},
+    {path:'setting' ,element:<DoctorSetting/>},
+    {path:'patient' ,element:<DoctorPatients/>},
+    {path:'suport' ,element:<DoctorSuport/>},
+    {path:'accounting' ,element:<DoctorAccounting/>},
   ]},
 
 

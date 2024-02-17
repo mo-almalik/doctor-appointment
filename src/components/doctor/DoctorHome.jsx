@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api.js'
-import { TbArrowAutofitRight, TbArrowNarrowLeft, TbLoader } from 'react-icons/tb'
+import {TbArrowNarrowLeft, TbLoader } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
 
 export default function DoctorHome() {
-  const [doctor,setDoctor] = useState(null)
+  const [doctor,setDoctor] = useState([])
   const [loading ,setLoading] = useState(false)
 
-  const MyAccount = async ()=>{
+  async function MyAccount (){
     setLoading(true)
     const {data} = await api.get('/doctor/account').catch((error)=>console.log(error))
     setDoctor(data);
-    console.log(doctor);
     setLoading(false)
   }
   useEffect(()=>{
@@ -26,7 +25,7 @@ export default function DoctorHome() {
      {loading ?<>
       <TbLoader className='animate-spin text-md ' />
      </> :<>
-     <h3 className='text-xl font-bold'>مرحبا د/ {doctor?.data.username}</h3>
+     <h3 className='text-xl font-bold'>مرحبا د/ {doctor?.data?.username}</h3>
      <p className='text-gray-300 mt-2'>{doctor?.message ? doctor?.message : ''}</p>
      </>}
      </div>

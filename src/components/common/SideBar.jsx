@@ -51,7 +51,7 @@ export default function SideBar(props) {
               </NavLink>
 
               <NavLink
-                to={"addproject"}
+                to={"patient"}
                 className={({ isActive }) =>
                   isActive
                     ? "my-1  flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
@@ -65,7 +65,7 @@ export default function SideBar(props) {
               </NavLink>
 
               <NavLink
-                to={"addproject"}
+                to={"times"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
@@ -79,7 +79,7 @@ export default function SideBar(props) {
               </NavLink>
 
               <NavLink
-                to={"addproject"}
+                to={"accounting"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
@@ -93,7 +93,7 @@ export default function SideBar(props) {
               </NavLink>
 
               <NavLink
-                to={"addproject"}
+                to={"setting"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
@@ -107,7 +107,7 @@ export default function SideBar(props) {
               </NavLink>
 
               <NavLink
-                to={"addproject"}
+                to={"suport"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
