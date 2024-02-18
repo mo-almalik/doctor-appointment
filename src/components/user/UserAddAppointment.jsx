@@ -21,22 +21,22 @@ UserAddAppointment() {
     name: "",
     phone: "",
     gender: "",
-    time:""
-
+   
   };
 
   let validationSchema = Yup.object({
     name: Yup.string().required("اسم المريض مطلوب"),
     gender: Yup.string().required("النوع مطلوب"),
     phone: Yup.string().required("الرقم مطلوب"),
-    time: Yup.string(),
+
+  
   });
   async function newAppointment(appointmentData) {
     setLoading (true)
     const  {data}  = await api
       .post(`/appointment/add/${id}`, {
         ...appointmentData ,
-      time:selectedSlot._id})
+      time:selectedSlot?._id })
       .catch((error) => {
         setError(error.response.data.message);
         
@@ -51,7 +51,7 @@ UserAddAppointment() {
     validationSchema,
     onSubmit: newAppointment,
   });
-
+console.log(selectedSlot?._id);
   const getDays = async(id)=>{
     setLoading(true)
      const response  = await api.get(`/time/${id}`).catch((error)=>console.log(setError(error.response?.data?.message)))
@@ -75,7 +75,7 @@ UserAddAppointment() {
     getDays(id)
   },[])
 
- 
+
   return (
     <>
       <h5 className="bg-main text-white p-5 text-center rounded-md shadow-md shadow-main-50 mb-5">
@@ -113,7 +113,7 @@ UserAddAppointment() {
             placeholder="رقم الهاتف "
             name="phone"
             id="phone"
-            type="number"
+            type="tel"
             className="w-full bg-gray-200 p-2 h-12 rounded-md my-2 focus:outline-none"
           />
            {formik.errors.phone && formik.touched.phone ? (
@@ -155,7 +155,7 @@ UserAddAppointment() {
                  </button>
               </> : <>
               <div className="flex justify-center items-center gap-5 my-3 ">
-             <div> {error ? error : ''}</div>
+             {/* <div> {error ? error : ''}</div> */}
                 
                   {available.map((day,index)=>
                     <div key={index} 

@@ -104,7 +104,7 @@ export default function DoctorTimes() {
             <div>
               <label className="text-gray-500" htmlFor="startTime">زمن البدء</label>
               <input
-                type="text"
+                type="time"
                 placeholder="زمن البدء"
                 name="startTime"
                 className="bg-gray-300 my-2 h-12 p-2 w-full rounded-md focus:outline-none"
@@ -121,7 +121,7 @@ export default function DoctorTimes() {
             <div>
               <label className="text-gray-500" htmlFor="endTime">زمن الانتهاء</label>
               <input
-                type="text"
+                type="time"
                 placeholder="زمن الانتهاء"
                 name="endTime"
                 className="bg-gray-300 my-2 h-12 p-2 w-full rounded-md focus:outline-none"

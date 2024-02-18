@@ -8,7 +8,7 @@ export function AuthProvider(props) {
     const token = getToken()
     
     const [auth,setAuth] = useState(token)
-console.log(auth);
+
 
 const logout = ()=>{
     setAuth(localStorage.removeItem('authToken'))
