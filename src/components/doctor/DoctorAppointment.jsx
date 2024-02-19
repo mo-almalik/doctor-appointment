@@ -53,31 +53,31 @@ export default function DoctorAppointment() {
   </div>
   </> : <>
   <table className='w-full em:w-full sm:w-full bg-white overflow-auto mx-auto rounded-md '>
-  <thead className='border border-gray-300 rounded-md'>
+  <thead className=' border-gray-100  border-b-2 rounded-md'>
     <tr className='py-5 text-sm'>
-      <th className='py-5 border-s-2  border-gray-100'>رقم التزكرة</th>
-      <th className='py-5 border-s-2 border-gray-100'>اسم  المريض</th>
-      <th className='py-5 border-s-2 border-gray-100'>   رقم الهاتف</th>
-      <th className='py-5 border-s-2  border-gray-100'>  النوع</th>
+      <th className='py-5   border-gray-100'>رقم التزكرة</th>
+      <th className='py-5  border-gray-100'>اسم  المريض</th>
+      <th className='py-5  border-gray-100'>   رقم الهاتف</th>
+      <th className='py-5   border-gray-100'>  النوع</th>
     
-      <th className='py-5 border-s-2  border-gray-100'>  حالة الطلب</th>
-      <th className='py-5 border-s-2  border-gray-100'>  الحالة</th>
+      <th className='py-5   border-gray-100'>  حالة الطلب</th>
+      <th className='py-5   border-gray-100'>  الحالة</th>
     </tr>
   </thead>
  
-  <tbody className='border border-gray-300 text-sm '>
+  <tbody className='  text-sm'>
 
   {appointment ? <>
-      {appointment.map((item,index)=> <tr key={index}>
-      <td className='py-2 border-s-2  border-gray-100  border-b-2 px-5 w-[60px]'>#{item.visitNo}</td>
-      <td className='py-2 border-s-2  border-gray-100  border-b-2'>{item.name}</td>
-      <td className='py-2 border-s-2  border-gray-100  border-b-2'>{item.phone}</td>
-      <td className='py-2 border-s-2  border-gray-100  border-b-2'>{gender[item.gender] }</td>
+      {appointment.map((item,index)=> <tr key={index} className='hover:bg-gray-200 duration-200 '>
+      <td className='py-2   border-gray-100  border-b-2  px-5 w-[60px] '>#{item.visitNo}</td>
+      <td className='py-2   border-gray-100  border-b-2 '>{item.name}</td>
+      <td className='py-2   border-gray-100  border-b-2 '>{item.phone}</td>
+      <td className='py-2   border-gray-100  border-b-2 '>{gender[item.gender] }</td>
 
-      <td className='py-2 border-s-2  border-gray-100  border-b-2 px-5 '>
+      <td className='py-2   border-gray-100  border-b-2  px-5 '>
       <span className={`bg-opacity-50 rounded-md text-[12px] p-2 ${statusColors[item.status]}`}>{status[item.status]}</span>
       </td>
-      <td className='py-2 border-s-2  border-gray-100  border-b-2 center'>
+      <td className='py-2   border-gray-100  border-b-2  center'>
       <Link to={`/appointment/${item._id}`} className='flex justify-center items-center'><TbEye  className='bg-red-400 hover:bg-red-500  p-2 text-xl text-white rounded-md duration-200 w-10 h-10 mx-1' /></Link>
         
       </td>

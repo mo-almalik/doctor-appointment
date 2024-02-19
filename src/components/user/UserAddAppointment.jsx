@@ -51,7 +51,7 @@ UserAddAppointment() {
     validationSchema,
     onSubmit: newAppointment,
   });
-console.log(selectedSlot?._id);
+
   const getDays = async(id)=>{
     setLoading(true)
      const response  = await api.get(`/time/${id}`).catch((error)=>console.log(setError(error.response?.data?.message)))
