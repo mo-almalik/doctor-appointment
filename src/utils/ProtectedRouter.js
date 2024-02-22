@@ -9,7 +9,7 @@ const Role = userRole()
 
   function UserRouter(props) {
     if(isAuthenticated() && Role === 'user'){
-        console.log(Role);
+        
         return props.children
     }else{
         return <Navigate to={'/'}/>

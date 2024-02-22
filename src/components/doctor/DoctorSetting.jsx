@@ -26,11 +26,11 @@ export default function DoctorSetting() {
   };
   const ActiveSectionComponent = sections[activeSection];
 
-  console.log( doctorInfo);
+  
   return <>
 
-  <div className=' flex  items-start gap-4 '>
-  <div className='bg-white h-52 rounded-md  w-[40%]'>
+  <div className=' flex  items-start gap-4 em:flex-col sm:flex-col w-full'>
+  <div className='bg-white h-52 rounded-md  w-[40%] em:w-full sm:w-full'>
     <div className='flex flex-col justify-center items-center mt-8'>
     {loading ? <>
 
@@ -39,10 +39,10 @@ export default function DoctorSetting() {
     </>}
      <h4> د/ <span>{doctorInfo.username}</span></h4>
      <h4>{doctorInfo.specialization}</h4>
-     <h4>التقيمات</h4>
-     ***
+     
+     
      {/* <h4>{ item.rating ? getStarIcons(item.rating)   : "" } </h4> */}
-     <div className='flex justify-between items-center w-full px-5'>
+     <div className='flex justify-between items-center w-full px-5 em:flex-col sm:flex-col em:gap-2'>
       <div className=' text-gray-600'>
        <span>سعر المقابلة :</span>
        
@@ -55,11 +55,11 @@ export default function DoctorSetting() {
      </div>
     </div>
   </div>
-  <div className='flex flex-col  rounded-md  gap-y-3 w-full'>
+  <div className='flex flex-col  rounded-md  gap-y-3 w-full '>
      
-    <div className='flex justify-around items-center bg-white p-4 rounded-md'>
+    <div className='flex justify-around items-center bg-white  p-4 rounded-md em:flex-col  em:space-y-4'>
     {Object.keys(sections).map((section, index) => (
-        <button key={index} onClick={() => handleSectionClick(section)} >
+        <button  key={index} onClick={() => handleSectionClick(section)} >
           {section}
         </button>
       ))}

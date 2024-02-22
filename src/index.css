@@ -11,3 +11,15 @@
 body{
     background:#E8E8E8;
 }
+@layer components{
+    .model {
+    position: fixed;
+     width: 40%;
+     height: 40%;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50% , -50%);
+     border-radius: 0.375rem;
+    
+    }
+}

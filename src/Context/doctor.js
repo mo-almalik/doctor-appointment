@@ -8,29 +8,47 @@ const DoctorContext = createContext();
 export function DoctorProvider(props) {
     const [loading ,setLoading] = useState(false)
     const [doctorInfo ,setDoctorInfo] = useState([])
-  
+    const [doctors ,setDoctors] = useState([])
+    const [doctorMessage ,setDoctorMessage] = useState([])
  async function UpdateInfo (DoctorData){
   setLoading(true)
-    const {data} = await api.put('/doctor/update-profile',{
+     await api.put('/doctor/update-profile',{
       ...DoctorData,
     }).catch((e)=>console.log(e.response.data.message));
-    console.log(data);
-    setLoading(false)
+    
+    
+    setTimeout(()=>{
+      GetDoctorData()
+    },2000)
+
+    setTimeout(()=>{
+      setLoading(false) 
+    },2000)
+    
+  
+
   }
 
 async function GetDoctorData() {
   setLoading(true)
   const {data} = await api.get('/doctor/account').catch((e)=>console.log(e.response.data.message));
-  console.log(data);
-  setDoctorInfo(data?.data)
+
+    setDoctorInfo(data?.data)
+    setDoctorMessage(data?.message)
+
   setLoading(false)
 }
 
-useEffect(()=>{
-  GetDoctorData()
-},[])
+async function GetDoctors() {
+  setLoading(true)
+  const {data} = await api.get('/doctor/').catch((e)=>console.log(e.response.data.message));
+  setDoctors(data?.data)
 
-  return <DoctorContext.Provider value={{loading , UpdateInfo ,GetDoctorData ,doctorInfo}}>
+  setLoading(false)
+}
+
+
+  return <DoctorContext.Provider value={{loading , UpdateInfo ,GetDoctorData ,doctorInfo , GetDoctors,doctors ,doctorMessage }}>
        {props.children}
     </DoctorContext.Provider>
  

@@ -5,13 +5,13 @@ import { useDoctor } from '../../Context/doctor.js';
 import { TbLoader } from 'react-icons/tb';
 import api from '../../services/api.js';
 export default function DoctorAppointmentSetting() {
-  const {UpdateInfo ,loading} = useDoctor()
+  const {UpdateInfo ,loading,doctorInfo} = useDoctor()
  
 
   let initialValues = {
-    phone: "",
-    price: "",
-    location: "",
+    phone:doctorInfo.phone || '',
+    price: doctorInfo.price || '',
+    location: doctorInfo.location || '',
    
 
   };
@@ -42,7 +42,7 @@ export default function DoctorAppointmentSetting() {
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          placeholder="رقم الهاتف "
+          placeholder={`${doctorInfo.phone ? doctorInfo.phone :"رقم الهاتف " }`}
           name="phone"
           id="phone"
           type="number"
@@ -63,7 +63,8 @@ export default function DoctorAppointmentSetting() {
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          placeholder="سعر المقابلة"
+          placeholder={`${doctorInfo.price ? doctorInfo.price :"سعر المقابلة" }`}
+         
           name="price"
           id="price"
           type="number"
@@ -85,7 +86,8 @@ export default function DoctorAppointmentSetting() {
         <textarea
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          placeholder="وصف الموقع"
+          placeholder={`${doctorInfo.location ? doctorInfo.location :"وصف الموقع" }`}
+           
           name="location"
           id="location"
           type="text"

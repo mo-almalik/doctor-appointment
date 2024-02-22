@@ -1,20 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDoctor } from '../../Context/doctor.js';
 import { TbLoader } from 'react-icons/tb';
+import api from '../../services/api.js';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/auth.js';
 export default function DoctorUpdateAccount() {
   const {UpdateInfo,loading  ,doctorInfo} = useDoctor()
- 
-
+  const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
+  const {logout} = useAuth()
 
   let initialValues = {
-    DOB: "",
-    bio: "",
-    email: "",
-    gender: "",
-    username: "",
-    specialization: "",
+    username: doctorInfo.username || '',
+      DOB: doctorInfo.DOB || '',
+      gender: doctorInfo.gender || 'mail',
+      email: doctorInfo.email || '',
+      specialization: doctorInfo.specialization || '',
+      bio: doctorInfo.bio || '',
   };
   let validationSchema = Yup.object({
     DOB: Yup.string(), //d
@@ -30,11 +35,37 @@ export default function DoctorUpdateAccount() {
     onSubmit: UpdateInfo
   });
 
+const handeleDeleteAccount = async()=>{
+  
+  const {data} = await api.delete('doctor/delete').catch((e)=>console.log(e.response.data.message));
+  if(data.success === true){
+    toast.success(data.message)
+    logout()
+    navigate('/')
 
+  }
+  
+}
 
 
   return <>
+    <div className='flex justify-between items-center em:flex-col'>
     <h4 className='my-5 text-white p-3 rounded-md bg-main w-fit  '>   بيانات الحساب</h4>
+    <div className='my-5 text-white p-2 rounded-md bg-red-400 w-fit text-sm cursor-pointer' onClick={()=>setIsOpen(!isOpen)} > 
+      حذف الحساب
+       <div className={`${isOpen ? 'bg-white shadow-md model z-50 text-gray-500 duration-500 ' : 'hidden'}`}>
+          
+           <div className='p-5'>
+ <button onClick={()=>setIsOpen(!isOpen)} className='bg-red-500'>اغلاق</button>
+ <button className='bg-red-500' onClick={()=>handeleDeleteAccount()}>حذف الحساب</button>
+           </div>
+       </div>
+      </div>
+    </div>
+    {loading ? <>
+      <button className='bg-secondary p-3 text-white rounded-md w-full flex justify-center items-center' >  <TbLoader className='animate-spin text-md ' /></button>
+
+    </> : <>
     <form onSubmit={formik.handleSubmit} className='text-sm text-gray-400' >
       <div className="my-4">
         <label htmlFor="username" className="text-gray-700 ">
@@ -182,5 +213,7 @@ export default function DoctorUpdateAccount() {
      <button className='bg-secondary p-3 text-white rounded-md w-full' type='submit'>حفظ</button>
      </>}
     </form>
+    </>}
+
   </>
 }

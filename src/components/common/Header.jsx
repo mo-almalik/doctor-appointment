@@ -1,18 +1,23 @@
-import React from 'react'
-import { user } from '../../utils/auth.js'
+import React, { useEffect } from 'react'
+
 import { useAuth } from '../../Context/auth.js';
 import { useNavigate } from 'react-router-dom';
 import { TbArrowBarLeft, TbMarquee2 } from 'react-icons/tb';
+import { useDoctor } from '../../Context/doctor.js';
 
 export default function Header() {
-  const User = user()
+  const {doctorInfo,GetDoctorData} = useDoctor()
   const {logout} = useAuth()
   let navigate =  useNavigate();
   const handleLogout = () => {
     logout();
     navigate('/doctor/login')
   };
+  
+useEffect(()=>{
+  GetDoctorData()
 
+},[])
   const toggleFullscreen = () => {
     const element = document.documentElement;
   
@@ -42,7 +47,7 @@ export default function Header() {
   };
   return (
     <div className='py-4 flex justify-between items-center bg-white shadow-md shadow-gray-200  leading-10 w-full px-5 mb-5 rounded-md'>
-      <div>{User.username}</div>
+      <div>{doctorInfo.username}</div>
       <div className=' flex items-center  gap-x-2 justify-center'>
         <button onClick={()=>toggleFullscreen()} title='تكبير الشاشة'><TbMarquee2 className='text-[23px]' /></button>
         <button onClick={()=>handleLogout()} className=' flex items-center  gap-x-2 justify-center hover:bg-gray-400 hover:text-white px-5 rounded-md duration-300'>  جروج <TbArrowBarLeft /></button>

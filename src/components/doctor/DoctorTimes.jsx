@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { TbLoader, TbPlayerPause, TbPlayerPauseFilled, TbPlus, TbTrash } from "react-icons/tb";
+import { TbClockPause, TbLoader, TbPlayerPause, TbPlayerPauseFilled, TbPlus, TbTrash } from "react-icons/tb";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import api from "../../services/api.js";
+import { toast } from "react-toastify";
 export default function DoctorTimes() {
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState([]);
   const [updateTime ,setUpdateTime] = useState(time)
   const [error ,setError] = useState(null)
+
 
   let Timevli = {
     day: "",
@@ -26,6 +28,7 @@ export default function DoctorTimes() {
       .get("/time/my-time")
       .catch((error) => console.log(error.response.data.message));
     setTime(response?.data?.data);
+   
     setLoading(false);
   }
 
@@ -35,12 +38,58 @@ export default function DoctorTimes() {
       .post("/time/add", TimeData)
       .catch((error) => {
         setError(error.response.data.message)
+        toast.error(error.response.data.message)
         setUpdateTime(time)
       });
     
     setUpdateTime(data?.data)
     setLoading(false);
+    
+    if(data.success === true){
+      toast.success(data.message)
+    }
    
+  }
+
+  async function StopTime(Tid){
+    setLoading(true);
+    const {data} = await api
+      .put(`/time/mange-time/${Tid}`)
+    
+      .catch((error) => {
+        setError(error.response.data.message)
+        toast.error(error.response.data.message)
+        
+      });
+    
+
+    setLoading(false);
+     
+    if(data.success === true){
+      toast.success(data.message)
+      getTimes()
+    }
+
+  }
+  async function DeleteTime(id){
+    setLoading(true);
+    const {data} = await api
+      .delete(`/time/delete-time/${id}`,)
+    
+      .catch((error) => {
+        setError(error.response.data.message)
+        toast.error(error.response.data.message)
+        
+      });
+    
+
+    setLoading(false);
+     
+    if(data.success === true){
+      toast.success(data.message)
+      getTimes()
+    }
+
   }
 
   let formik = useFormik({
@@ -64,7 +113,7 @@ export default function DoctorTimes() {
     Sunday: 'الأحد',
   };
   
-  console.log(time);
+
   return (
     <>
       <div className=" w-full grid grid-cols-2 em:grid-cols-1 sm:grid-cols-1 gap-5">
@@ -180,11 +229,13 @@ export default function DoctorTimes() {
                             </span>
                           </div>
                           <div className="flex justify-center items-center gap-x-2">
-                            <button className={`${item.isAvailable ? 'text-gray-400' : 'text-green-400'}`} title={`${item.isAvailable ? 'ايقاف' : 'تشغيل'}`}><TbPlayerPauseFilled  /></button>
-                            <button className="text-red-400"><TbTrash /></button>
+                            <button onClick={()=>StopTime(item._id)}
+                             className={`${item.isAvailable ? 'text-gray-400' : 'text-green-400'}`} title={`${item.isAvailable ? 'ايقاف' : 'تشغيل'}`}><TbClockPause   /></button>
+                            <button onClick={()=>DeleteTime(item._id)} className="text-red-400"><TbTrash /></button>
                           </div>
                         </div>
                       </div>
+                      
                     ))}
                   </>
                 ) : (

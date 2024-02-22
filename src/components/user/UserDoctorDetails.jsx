@@ -51,11 +51,11 @@ const [loading ,setLoading] = useState(false)
             </div>
           </div>
           <div className='bg-white my-5 p-5 rounded-md '>
-            <h3>معلومات عن الدكتور</h3>
+            <h3 className='mb-3'>معلومات عن الدكتور</h3>
               {loading ? <>
               <TbLoader className='animate-spin' />
             </> :<>
-            <p> {doctor.bio}</p>
+            <p className='text-gray-600'> {doctor.bio}</p>
             </>}
           </div>
           <div className='bg-white my-5 p-5 rounded-md '> شركات التأمين</div>
