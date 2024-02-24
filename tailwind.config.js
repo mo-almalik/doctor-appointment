@@ -10,7 +10,7 @@ module.exports = {
       primary:'#312ECB',
       secondary:'#2E4049',
       light:'#E8E8E8',
-      NavLink:'#737791',
+      NavLink:'#A9A9A9',
       cardOne:'#FFE2E5',
       cardTow:'#FFF4DE',
       'main': {  DEFAULT: '#4162EF',  50: '#B8DAFF',  100: '#A3CFFF',  200: '#7ABAFF',  300: '#52A5FF',  400: '#298FFF',  500: '#007AFF',  600: '#005FC7',  700: '#00448F',  800: '#002957',  900: '#000F1F',  950: '#000103'},

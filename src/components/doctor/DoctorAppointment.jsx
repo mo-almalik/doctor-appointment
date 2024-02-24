@@ -84,7 +84,7 @@ export default function DoctorAppointment() {
                   <th className="py-5  border-gray-100">اسم المريض</th>
                   <th className="py-5  border-gray-100"> رقم الهاتف</th>
                   <th className="py-5   border-gray-100"> النوع</th>
-
+                  <th className="py-5   border-gray-100"> التاريخ</th>
                   <th className="py-5   border-gray-100"> حالة الطلب</th>
                   <th className="py-5   border-gray-100"> الحالة</th>
                 </tr>
@@ -109,6 +109,14 @@ export default function DoctorAppointment() {
                         </td>
                         <td className="py-2   border-gray-100  border-b-2 ">
                           {gender[item.gender]}
+                        </td>
+                        <td className="py-2   border-gray-100  border-b-2 ">
+                        {new Date(item.date).toLocaleString('ar-EG', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            timeZone: 'UTC',
+                          })}
                         </td>
 
                         <td className="py-2   border-gray-100  border-b-2  px-5 ">

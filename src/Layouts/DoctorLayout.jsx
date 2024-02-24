@@ -20,7 +20,7 @@ export default function DoctorLayout() {
         </button>
       </div>
 
-      <div className="flex w-full h-screen  bg-light">
+      <div className="flex w-full h-screen  bg-WHITE">
         <SideBar
           className={`${
             open

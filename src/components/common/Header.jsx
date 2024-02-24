@@ -47,7 +47,7 @@ useEffect(()=>{
   };
   return (
     <div className='py-4 flex justify-between items-center bg-white shadow-md shadow-gray-200  leading-10 w-full px-5 mb-5 rounded-md'>
-      <div>{doctorInfo.username}</div>
+      
       <div className=' flex items-center  gap-x-2 justify-center'>
         <button onClick={()=>toggleFullscreen()} title='تكبير الشاشة'><TbMarquee2 className='text-[23px]' /></button>
         <button onClick={()=>handleLogout()} className=' flex items-center  gap-x-2 justify-center hover:bg-gray-400 hover:text-white px-5 rounded-md duration-300'>  جروج <TbArrowBarLeft /></button>

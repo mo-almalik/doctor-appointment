@@ -24,6 +24,7 @@ UserAddAppointment() {
    
   };
 
+
   let validationSchema = Yup.object({
     name: Yup.string().required("اسم المريض مطلوب"),
     gender: Yup.string().required("النوع مطلوب"),
@@ -157,6 +158,7 @@ UserAddAppointment() {
               <div className="flex justify-center items-center gap-5 my-3 ">
              {/* <div> {error ? error : ''}</div> */}
                 
+                
                   {available.map((day,index)=>
                     <div key={index} 
                      onClick={() => setSelectedSlot(day)}
@@ -164,7 +166,7 @@ UserAddAppointment() {
                    <div className="bg-main w-full rounded-md shadow-sm ">
                   <div className="px-2 text-center py-2">
                   <span className="text-sm text-white "  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange} >{daysAr[day.day]} </span>
+                   onChange={formik.handleChange} >{daysAr[day.day]} </span>
                   </div>
                    </div>
 
