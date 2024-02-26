@@ -6,7 +6,7 @@ import { TbArrowBarLeft, TbMarquee2 } from 'react-icons/tb';
 import { useDoctor } from '../../Context/doctor.js';
 
 export default function Header() {
-  const {doctorInfo,GetDoctorData} = useDoctor()
+  const {GetDoctorData} = useDoctor()
   const {logout} = useAuth()
   let navigate =  useNavigate();
   const handleLogout = () => {

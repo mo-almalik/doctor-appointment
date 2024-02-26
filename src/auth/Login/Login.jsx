@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import { saveAuthData, isAuthenticated } from "../../utils/auth.js";
+import { saveAuthData, isAuthenticated, userRole } from "../../utils/auth.js";
 import api from "../../services/api.js";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/common/Navbar.jsx";
@@ -35,7 +35,21 @@ export default function Login() {
       const token = 'Bearer ' +  data.token;
 
       saveAuthData(token);
-      navigate('/')
+   
+      if (isAuthenticated()) {
+      
+        switch (userRole) {
+          case 'admin':
+            navigate('/admin');
+            break;
+          case 'user':
+            navigate('/');
+            break;
+         
+          default:
+            // يمكنك إضافة سلوك إضافي هنا إذا لزم الأمر
+        }
+      }
     }
   }
 
@@ -44,6 +58,8 @@ export default function Login() {
     validationSchema,
     onSubmit: Login,
   });
+
+  
   return <>
     <Navbar />
     <div className="flex justify-center items-center container w-full mx-auto bg-gray-100 shadow-sm rounded-lg py-5 my-5 gap-4">

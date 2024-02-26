@@ -62,6 +62,7 @@ export default function DoctorAnalytics() {
       </div>
 
 
+
       <div className="w-full h-80 bg-white rounded-md">
         
       </div>
