@@ -11,10 +11,16 @@ export default function DoctorWelcome() {
 
   return <>
   {doctorMessage ? <>
-
+    {loading ?<>
+      <button className='bg-main  w-full px-5 h-10 text-white rounded-md flex items-center justify-between gap-3 text-sm hover:shadow-sm hover:bg-white hover:text-main'>
+      <TbLoader className='animate-spin text-md ' />
+      </button>
+    </> :<>
     <Link to={'setting'}>
 <button className='bg-main  w-full px-5 h-10 text-white rounded-md flex items-center justify-between gap-3 text-sm hover:shadow-sm hover:bg-white hover:text-main'>{doctorMessage}   <TbArrowNarrowLeft  /></button>
 </Link>
+    </>}
+    
 
   </> : <>
     <div>

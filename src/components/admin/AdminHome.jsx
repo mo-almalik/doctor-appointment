@@ -1,9 +1,10 @@
 import React from 'react'
+import AdminAnalytics from './AdminAnalytics.jsx'
 
 export default function AdminHome() {
-  return (
+  return <>
     <div>
-      AdminHome
+      <AdminAnalytics />
     </div>
-  )
+  </>
 }

@@ -9,7 +9,7 @@ export default function DoctorLayout() {
 
   return (
     <>
-      <div className="absolute z-50 right-[12%] em:right-[70%]">
+      <div className="absolute z-50 right-[12%] em:right-[70%] ">
         <button
           className={` mx-10 cursor-pointer  bg-main w-7 h-7 flex justify-center items-center rounded-md text-white    ${
             !open && "rotate-180"

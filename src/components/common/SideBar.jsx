@@ -16,10 +16,10 @@ export default function SideBar(props) {
 
       <div className={props.className + " px-5"}>
         <div className="flex justify-start items-center py-3 ">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" className="size-8"/>
           <h5 className="mx-3">عافية </h5>
         </div>
-        {isAuthenticated && userRole === 'admin' ? <>
+        {isAuthenticated() && userRole() === 'admin' ? <>
           <AdminSlider />
         </> : <><DoctorSlider/></>}
       </div>

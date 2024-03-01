@@ -10,7 +10,7 @@ import {
 } from "react-icons/tb";
 export default function DoctorSlider() {
   return <>
-     <div className="flex flex-col justify-around my-9">
+     <div className="flex flex-col justify-around my-5 text-sm">
           <div className="">
             <ul className=" flex flex-col items-center text-md">
               <NavLink

@@ -22,13 +22,20 @@ import { getToken } from './utils/auth.js';
 import { useEffect } from 'react';
 import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
 import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
-import DoctorUpdateAccount from './components/doctor/DoctorUpdateAccount.jsx';
 import DoctorAccount from './components/doctor/DoctorAccount.jsx';
 import DoctorTimes from './components/doctor/DoctorTimes.jsx';
 import DoctorSetting from './components/doctor/DoctorSetting.jsx';
 import DoctorPatients from './components/doctor/DoctorPatients.jsx';
 import DoctorSuport from './components/doctor/DoctorSuport.jsx';
 import DoctorAccounting from './components/doctor/DoctorAccounting.jsx';
+import AdminAppointments from './components/admin/AdminAppointments.jsx';
+import AdminSettings from './components/admin/AdminSettings.jsx';
+import AdminDocrots from './components/admin/AdminDocrots.jsx';
+import AdminDoctorDetails from './components/admin/AdminDoctorDetails.jsx';
+import AdminUsers from './components/admin/AdminUsers.jsx';
+import AdminUserDetails from './components/admin/AdminUserDetails.jsx';
+import AdminSuport from './components/admin/AdminSuport.jsx';
+import AdminAppointmetDetails from './components/admin/AdminAppointmetDetails.jsx';
 
 
 let Routers =createBrowserRouter([
@@ -50,10 +57,7 @@ let Routers =createBrowserRouter([
   {path:'/cms',element: <DoctorRouter><DoctorLayout /></DoctorRouter> ,children:[
     {index:true ,element:<DoctorHome />},
     {path:'appointments' ,element:<DoctorAppointment/>},
-    {path:'account' ,element:<DoctorAccount/> ,children:[
-      {path:'update' ,element:<DoctorUpdateAccount/>},
-      
-    ]}, 
+    {path:'account' ,element:<DoctorAccount/>}, 
     {path:'times' ,element:<DoctorTimes/>},
     {path:'setting' ,element:<DoctorSetting/>},
     {path:'patient' ,element:<DoctorPatients/>},
@@ -64,7 +68,16 @@ let Routers =createBrowserRouter([
 
   // admin routers
   {path:'/admin',element:<AdminRouter><AdminLayout /></AdminRouter> ,children:[
-    {index:true ,element:<AdminHome />}
+    {index:true ,element:<AdminHome />},
+    {path:'appointments' ,element:<AdminAppointments/>},
+    {path:'appointment/id' ,element:<AdminAppointmetDetails/>},
+    {path:'settings' ,element:<AdminSettings/>},
+    {path:'doctors' ,element:<AdminDocrots/>},
+    {path:'doctor/:id' ,element:<AdminDoctorDetails/>},
+    {path:'users' ,element:<AdminUsers/>},
+    {path:'user/:id' ,element:<AdminUserDetails/>},
+    {path:'suport' ,element:<AdminSuport/>},
+
   ]},
 
   // public page 
