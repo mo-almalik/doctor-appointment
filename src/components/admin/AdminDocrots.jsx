@@ -1,23 +1,37 @@
 import React, { useContext, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
-import { AdminContext, useAdmin } from '../../Context/admin.js';
+import { AdminContext } from '../../Context/admin.js';
 import Loading from '../../utils/Loading.jsx';
 import { TbArrowLeft} from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function AdminDocrots() {
   const {loading,getAllDocotrs ,doctors} = useContext(AdminContext)
-
+  const location = useLocation();
+  const shouldDisplayTitle = location.pathname !== '/admin';
   useEffect(()=>{
     getAllDocotrs()
   },[])
   return <>
-      <Helmet>
-        <title>الأطباء</title>
-      </Helmet>
+       {shouldDisplayTitle && (
+        <Helmet>
+          <title>الأطباء</title>
+        </Helmet>
+      )}
 
-      <div className="w-full  rounded-md mx-auto mt-10 overflow-auto ">
-      
+      <div className="w-full  rounded-md mx-auto  overflow-auto ">
+      {shouldDisplayTitle && (<>
+        <div className='my-3 '>
+    <h3> الأطباء</h3>
+    <p className='text-gray-600 text-sm my-1'>عرض كل الاطباء و يمكنك الفلترة</p>
+    </div>
+    <select className='h-10 rounded-md my-2 px-5 text-gray-500 outline-none'>
+          <option  defaultValue={true}>الكل</option>
+           <option value={'new'}>طلبات جديدة</option>
+        </select>
+      </>)}
+    
+       
      
         {loading ? (
           <>
@@ -96,6 +110,11 @@ export default function AdminDocrots() {
           </>
         )}
       </div>
+
+
+
+
+      
     </>
 }
  

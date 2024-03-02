@@ -23,3 +23,11 @@ body{
     
     }
 }
+
+table
+thead
+tr
+th{
+    font-weight: normal;
+    font-size: 15px;
+}
