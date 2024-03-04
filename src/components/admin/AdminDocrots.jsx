@@ -1,17 +1,18 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import { Helmet } from 'react-helmet';
-import { AdminContext } from '../../Context/admin.js';
+import { useAdmin } from '../../Context/admin.js';
 import Loading from '../../utils/Loading.jsx';
 import { TbArrowLeft} from 'react-icons/tb';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function AdminDocrots() {
-  const {loading,getAllDocotrs ,doctors} = useContext(AdminContext)
+  const {loading,getAllDocotrs ,doctors} = useAdmin()
   const location = useLocation();
   const shouldDisplayTitle = location.pathname !== '/admin';
   useEffect(()=>{
     getAllDocotrs()
   },[])
+  const sortedItems = doctors.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return <>
        {shouldDisplayTitle && (
         <Helmet>
@@ -58,7 +59,7 @@ export default function AdminDocrots() {
               <tbody className="text-sm">
                 {doctors ? (
                   <>
-                    {doctors.map((item, index) => (
+                    {sortedItems.map((item, index) => (
                       <tr
                         key={index}
                         className="duration-200 "

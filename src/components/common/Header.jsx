@@ -1,24 +1,29 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { useAuth } from '../../Context/auth.js';
 import { useNavigate } from 'react-router-dom';
 import { TbArrowBarLeft, TbMarquee2 } from 'react-icons/tb';
-import { useDoctor } from '../../Context/doctor.js';
-import { isAuthenticated, userRole } from '../../utils/auth.js';
+import { userRole } from '../../utils/auth.js';
+
+
 
 export default function Header() {
-  const {GetDoctorData} = useDoctor()
+ 
   const {logout} = useAuth()
   let navigate =  useNavigate();
   const handleLogout = () => {
     logout();
-    navigate('/doctor/login')
+    if(userRole() === 'doctor'){
+      return navigate('/doctor/login')
+    }
+    if(userRole() === 'admin' || 'user' ){
+     return navigate('/login')
+    }
+   
   };
   
 
-useEffect(()=>{
-  isAuthenticated() && userRole() === 'doctor' ? GetDoctorData() : <></>
-},[])
+
   const toggleFullscreen = () => {
     const element = document.documentElement;
   

@@ -36,6 +36,7 @@ import AdminUsers from './components/admin/AdminUsers.jsx';
 import AdminUserDetails from './components/admin/AdminUserDetails.jsx';
 import AdminSuport from './components/admin/AdminSuport.jsx';
 import AdminAppointmetDetails from './components/admin/AdminAppointmetDetails.jsx';
+import AdminDoctorAds from './components/admin/AdminDoctorAds.jsx';
 
 
 let Routers =createBrowserRouter([
@@ -77,6 +78,7 @@ let Routers =createBrowserRouter([
     {path:'users' ,element:<AdminUsers/>},
     {path:'user/:id' ,element:<AdminUserDetails/>},
     {path:'suport' ,element:<AdminSuport/>},
+    {path:'doctor-ads' ,element:<AdminDoctorAds/>},
 
   ]},
 
@@ -88,7 +90,6 @@ let Routers =createBrowserRouter([
 function App() {
 useEffect(()=>{
   getToken()
-
 },[])
 
   return<>

@@ -67,7 +67,7 @@ export default function AdminSlider() {
                 </span>
               </NavLink>
               <NavLink
-                to={"/doctorstar"}
+                to={"doctor-ads"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
@@ -75,7 +75,6 @@ export default function AdminSlider() {
                 }
               >
                 <span className="flex items-center gap-x-2">
-                  
                   <TbUserStar className="size-5" /> الأطباء المميزين
                 </span>
               </NavLink>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import getStarIcons from '../user/Userreview.js'
+import React, { useEffect, useState } from 'react'
 import DoctorUpdateAccount from './DoctorUpdateAccount.jsx';
 import DoctorAppointmentSetting from './DoctorAppointmentSetting.jsx';
 import DoctorPasswordChenge from './DoctorPasswordChenge.jsx';
@@ -11,7 +10,7 @@ const SettingsSection = () => <div><DoctorAppointmentSetting /> </div>;
 const ReviewsSection = () => <div>محتوى التقييمات</div>;
 const PasswordChange = () => <div> <DoctorPasswordChenge /> </div>;
 export default function DoctorSetting() {
-  const {doctorInfo,loading} = useDoctor() 
+  const {doctorInfo,loading,GetDoctorData} = useDoctor() 
   const [activeSection, setActiveSection] = useState('التقييمات');
   const sections = {
     'حسابي': AccountSection,
@@ -26,7 +25,9 @@ export default function DoctorSetting() {
   };
   const ActiveSectionComponent = sections[activeSection];
 
-  
+  useEffect(()=>{
+    GetDoctorData()
+  },[])
   return <>
 
   <div className=' flex  items-start gap-4 em:flex-col sm:flex-col w-full'>

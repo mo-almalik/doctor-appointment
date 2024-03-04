@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import api from '../services/api.js';
 
 
@@ -10,6 +10,10 @@ export function DoctorProvider(props) {
     const [doctorInfo ,setDoctorInfo] = useState([])
     const [doctors ,setDoctors] = useState([])
     const [doctorMessage ,setDoctorMessage] = useState([])
+    // const [currentPage ,setCurrentPage]= useState(1)
+    // const[totalPages ,setTotalPages]= useState(1)
+    // const [onPageChange ,setOnPageChange]= useState()
+
  async function UpdateInfo (DoctorData){
   setLoading(true)
      await api.put('/doctor/update-profile',{

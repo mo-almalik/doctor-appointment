@@ -3,51 +3,48 @@
     import React, { useEffect, useState } from "react";
     import api from "../../services/api.js";
     import {
-      TbEye,
-      TbSquareRoundedMinus,
+  
       TbSquareRoundedPlus,
-      TbSquareRoundedX,
+  
     } from "react-icons/tb";
    
     import Loading from "../../utils/Loading.jsx";
     import { Helmet } from "react-helmet";
-    import { toast } from "react-toastify";
+import Pagination from "../../utils/Pagination.jsx";
+
     
     export default function DoctorPatients() {
       const [appointment, setAppointment] = useState([]);
       const [loading, setLoading] = useState(false);
-    
-      const getMyAppointment = async () => {
+      const[totalPages ,setTotalPages]= useState(1)
+  const [currentPage ,setCurrentPage]= useState(1)
+      async function getMyAppointment(pages) {
         setLoading(true);
-        const { data } = await api
-          .get("/doctor/patients")
+        const data  = await api
+          .get(`/doctor/patients?page=${pages}`)
           .catch((e) => console.log(e.response.data.message));
-        setAppointment(data.data);
+        setAppointment(data?.data.data.docs);
+        setTotalPages(data?.data.data.totalPages)
     
         setLoading(false);
       };
     
-
+      const handlePageChange = (pages) => {
+        setCurrentPage(pages);
+      };
     
       useEffect(() => {
-        getMyAppointment();
-      }, []);
+        getMyAppointment(currentPage);
+      }, [currentPage]);
     
       const gender = {
         female: "انثي",
         mail: "ذكر",
       };
     
-      const status = {
-        pending: "انتظار",
-        confirmed: "ماكد",
-        canceled: "ملغي",
-      };
-      const statusColors = {
-        pending: "bg-green-500 ",
-        confirmed: "bg-main-500",
-        canceled: "bg-yellow-500",
-      };
+
+      const sortedItems = appointment.sort((a, b) => new Date(b.date) - new Date(a.date));
+
       return (
         <>
           <Helmet>
@@ -78,7 +75,7 @@
                   <tbody className="  text-sm">
                     {appointment ? (
                       <>
-                        {appointment.map((item, index) => (
+                        {sortedItems.map((item, index) => (
                           <tr
                             key={index}
                             className="hover:bg-gray-200 duration-200 "
@@ -117,7 +114,11 @@
                       <h6>لاتوجد مشاريع</h6>
                     )}
                   </tbody>
+                  
                 </table>
+                <Pagination currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange} />
               </>
             )}
           </div>

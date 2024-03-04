@@ -1,12 +1,12 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import { Helmet } from 'react-helmet';
-import { AdminContext, useAdmin } from '../../Context/admin.js';
+import { useAdmin} from '../../Context/admin.js';
 import Loading from '../../utils/Loading.jsx';
 
 export default function AdminAppointments() {
 
  
-  const {loading,appointment,getAllAppoientment} =useContext(AdminContext)
+  const {loading,appointment,getAllAppoientment} =useAdmin()
   const gender = {
     female: "انثي",
     mail: "ذكر",
@@ -25,7 +25,8 @@ export default function AdminAppointments() {
   useEffect(()=>{
     getAllAppoientment() 
   },[])
-   
+  const sortedItems = appointment.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return <>
       <Helmet>
         <title>الحجوزات</title>
@@ -76,9 +77,9 @@ export default function AdminAppointments() {
               </thead>
 
               <tbody className="text-sm">
-                {appointment ? (
+                {appointment  ? (
                   <>
-                    {appointment.map((item, index) => (
+                    {sortedItems.map((item, index) => (
                       <tr
                         key={index}
                         className="duration-200 "

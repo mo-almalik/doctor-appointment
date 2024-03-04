@@ -1,17 +1,18 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import { Helmet } from 'react-helmet';
-import { AdminContext, useAdmin } from '../../Context/admin.js';
+import { useAdmin } from '../../Context/admin.js';
 import Loading from '../../utils/Loading.jsx';
 import { TbArrowLeft} from 'react-icons/tb';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function AdminUsers() {
-  const {loading,users,getAllusers} = useContext(AdminContext)
+  const {loading,users,getAllusers} = useAdmin()
   const location = useLocation();
   const shouldDisplayTitle = location.pathname !== '/admin';
   useEffect(()=>{
     getAllusers()
   },[])
+  const sortedItems = users.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return <>
       {shouldDisplayTitle && (
         <Helmet>

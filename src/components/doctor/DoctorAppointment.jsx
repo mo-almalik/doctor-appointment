@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import {
-  TbEye,
   TbSquareRoundedMinus,
   TbSquareRoundedPlus,
-  TbSquareRoundedX,
 } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Loading from "../../utils/Loading.jsx";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import Pagination from "../../utils/Pagination.jsx";
 
 export default function DoctorAppointment() {
   const [appointment, setAppointment] = useState([]);
   const [loading, setLoading] = useState(false);
+  const[totalPages ,setTotalPages]= useState(1)
+  const [currentPage ,setCurrentPage]= useState(1)
+  const location = useLocation();
+  const shouldDisplayTitle = location.pathname !== '/cms';
 
-  const getMyAppointment = async () => {
+
+  async function getMyAppointment(pages) {
     setLoading(true);
-    const { data } = await api
-      .get("/doctor/my-appointment")
+    const  data  = await api
+      .get(`/doctor/my-appointment?page=${pages}`)
       .catch((e) => console.log(e.response.data.message));
-    setAppointment(data.data);
+    setAppointment(data?.data.appointments.docs);
+    setTotalPages(data?.data.appointments.totalPages)
+    // console.log(data?.data.appointments.page);
 
     setLoading(false);
   };
@@ -45,9 +51,13 @@ export default function DoctorAppointment() {
   }
 
   useEffect(() => {
-    getMyAppointment();
-  }, []);
+    getMyAppointment(currentPage);
+  }, [currentPage]);
+ 
 
+  const handlePageChange = (pages) => {
+    setCurrentPage(pages);
+  };
   const gender = {
     female: "انثي",
     mail: "ذكر",
@@ -63,11 +73,16 @@ export default function DoctorAppointment() {
     confirmed: "bg-main-500",
     canceled: "bg-yellow-500",
   };
+  
+  const sortedItems = appointment.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
     <>
-      <Helmet>
-        <title>الحجوزات</title>
-      </Helmet>
+       {shouldDisplayTitle && (
+        <Helmet>
+          <title>الحجوزات</title>
+        </Helmet>
+      )}
       <div className="w-full  text-center  rounded-md mx-auto mt-10 overflow-auto ">
         {loading ? (
           <>
@@ -93,7 +108,7 @@ export default function DoctorAppointment() {
               <tbody className="  text-sm">
                 {appointment ? (
                   <>
-                    {appointment.map((item, index) => (
+                    {sortedItems.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-gray-200 duration-200 "
@@ -152,7 +167,11 @@ export default function DoctorAppointment() {
                   <h6>لاتوجد مشاريع</h6>
                 )}
               </tbody>
-            </table>
+              
+            </table> 
+            <Pagination currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange} />
           </>
         )}
       </div>
