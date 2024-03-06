@@ -1,12 +1,12 @@
-import React, { useEffect} from 'react'
+import React, { useContext, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
-import { useAdmin} from '../../Context/admin.js';
+import { AdminContext, useAdmin} from '../../Context/admin.js';
 import Loading from '../../utils/Loading.jsx';
 
 export default function AdminAppointments() {
 
  
-  const {loading,appointment,getAllAppoientment} =useAdmin()
+  const {loading,appointment,getAllAppoientment} =useContext(AdminContext)
   const gender = {
     female: "انثي",
     mail: "ذكر",

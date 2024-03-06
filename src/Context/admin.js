@@ -37,7 +37,7 @@ async function getAllAppoientment() {
     handleError(e.response.data.message); 
 });
 if(data) {
-    setAppointment(data?.data.data);
+    setAppointment(data?.data.data.docs);
 }
   setLoading(false)
 }
@@ -49,7 +49,7 @@ async function getAllusers() {
     handleError(e.response.data.message); 
 });
 if(data) {
-    setUsers(data?.data.data)
+    setUsers(data?.data.data.docs)
 }
   setLoading(false)
 }
@@ -62,7 +62,7 @@ async function getAllDocotrs() {
     handleError(e.response.data.message); 
 });
 if(data) {
-    setDoctors(data?.data.data)
+    setDoctors(data?.data.data.docs)
 }
   setLoading(false)
 }
@@ -75,6 +75,7 @@ async function GetDoctor(id) {
 });
 if(data) {
   setDoctorAccount(data?.data.data)
+
 }
   setLoading(false)
 }
@@ -89,10 +90,10 @@ if(data) {
  
 };
 
-export const useAdmin = () => {
-  const context = useContext(AdminContext);
-  if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
-}
+// export const useAdmin = () => {
+//   const context = useContext(AdminContext);
+//   if (!context) {
+//     throw new Error('useUser must be used within a UserProvider');
+//   }
+//   return context;
+// }

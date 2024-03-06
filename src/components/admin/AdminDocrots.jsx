@@ -1,12 +1,12 @@
-import React, { useEffect} from 'react'
+import React, { useContext, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
-import { useAdmin } from '../../Context/admin.js';
+import { AdminContext} from '../../Context/admin.js';
 import Loading from '../../utils/Loading.jsx';
 import { TbArrowLeft} from 'react-icons/tb';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function AdminDocrots() {
-  const {loading,getAllDocotrs ,doctors} = useAdmin()
+  const {loading,getAllDocotrs ,doctors} = useContext(AdminContext)
   const location = useLocation();
   const shouldDisplayTitle = location.pathname !== '/admin';
   useEffect(()=>{

@@ -4,17 +4,14 @@ import api from '../../services/api.js';
 import { Link } from 'react-router-dom';
 import doct1 from '../../Assets/image/doc2.jpg'
 import { Helmet } from 'react-helmet';
+import { useDoctor } from '../../Context/doctor.js';
 export default function UserHome() {
-  const [doctor , setDoctors]= useState([])
+  const {doctors ,GetDoctors} = useDoctor()
+ useEffect(()=>{
+  GetDoctors()
+ },[])
   
-  const getDoctors= async()=>{
-   const {data}= await api.get('/doctor/').catch((err)=>console.log(err))
-   setDoctors(data?.data)
-   console.log(doctor);
-  }
-  useEffect(()=>{
-  getDoctors()
-  },[])
+
   return <>
   <Helmet>
     <title>عافية</title>
@@ -58,7 +55,7 @@ export default function UserHome() {
       <h4 className='mb-7 text-md font-semibold text-main-400'>الاطباء المميزين</h4>
 
       <div className='grid grid-cols-4 gap-5 '>
-      {doctor.slice(0,4).map((item ,index)=>(
+      {doctors.map((item)=>(
         <Link to={`/doctor/${item._id}`} key={item._id} >
       <div className='h-fit bg-white  rounded-lg text-center p-5'>
        <img src={doct1} alt={item.username}  className='w-full rounded-lg'/>

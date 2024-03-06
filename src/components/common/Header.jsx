@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useAuth } from '../../Context/auth.js';
 import { useNavigate } from 'react-router-dom';
@@ -7,10 +7,12 @@ import { userRole } from '../../utils/auth.js';
 
 
 
+
 export default function Header() {
  
   const {logout} = useAuth()
   let navigate =  useNavigate();
+  
   const handleLogout = () => {
     logout();
     if(userRole() === 'doctor'){

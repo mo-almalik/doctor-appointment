@@ -26,7 +26,7 @@ export default function DoctorAppointment() {
       .catch((e) => console.log(e.response.data.message));
     setAppointment(data?.data.appointments.docs);
     setTotalPages(data?.data.appointments.totalPages)
-    // console.log(data?.data.appointments.page);
+  
 
     setLoading(false);
   };
@@ -74,7 +74,7 @@ export default function DoctorAppointment() {
     canceled: "bg-yellow-500",
   };
   
-  const sortedItems = appointment.sort((a, b) => new Date(b.date) - new Date(a.date));
+
 
   return (
     <>
@@ -108,7 +108,7 @@ export default function DoctorAppointment() {
               <tbody className="  text-sm">
                 {appointment ? (
                   <>
-                    {sortedItems.map((item, index) => (
+                    {appointment.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-gray-200 duration-200 "

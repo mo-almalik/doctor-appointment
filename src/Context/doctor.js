@@ -35,10 +35,10 @@ export function DoctorProvider(props) {
 
 async function GetDoctorData() {
   setLoading(true)
-  const {data} = await api.get('/doctor/account').catch((e)=>console.log(e.response.data.message));
+  const data = await api.get('/doctor/account').catch((e)=>console.log(e.response.data.message));
 
     setDoctorInfo(data?.data)
-    setDoctorMessage(data?.message)
+    setDoctorMessage(data?.data.message)
 
   setLoading(false)
 }
@@ -46,7 +46,7 @@ async function GetDoctorData() {
 async function GetDoctors() {
   setLoading(true)
   const {data} = await api.get('/doctor/').catch((e)=>console.log(e.response.data.message));
-  setDoctors(data?.data)
+  setDoctors(data?.data.docs)
 
   setLoading(false)
 }

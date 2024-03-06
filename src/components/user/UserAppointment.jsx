@@ -12,7 +12,7 @@ export default function UserAppointment() {
   const getMyAppointment = async()=>{
     setLoading(true)
     const {data} = await api.get('/user/appointments').catch((error)=>console.log(error));
-    setAppointment(data.data)
+    setAppointment(data.data.docs)
     
     setLoading(false)
   }

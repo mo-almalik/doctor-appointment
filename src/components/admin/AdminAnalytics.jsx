@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   TbBriefcaseFilled,
   TbCoin,
@@ -6,13 +6,13 @@ import {
   TbStethoscope,
   TbUsersGroup,
 } from "react-icons/tb";
-import {  useAdmin } from "../../Context/admin.js";
+import {  AdminContext, useAdmin } from "../../Context/admin.js";
 import { useError } from "../../Context/error.js";
 import ErrorPage from "../../utils/ErrorPage.jsx";
 
 
 export default function AdminAnalytics() {
-  const {counts ,getCount ,loading} = useAdmin()
+  const {counts ,getCount ,loading} = useContext(AdminContext)
   const {error } =useError()
 
   useEffect(()=>{
