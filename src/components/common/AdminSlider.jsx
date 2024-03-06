@@ -8,6 +8,7 @@ import {
   TbHelpCircle,
   TbLayoutGrid,
   TbUser,
+  TbUserPlus,
   TbUserStar,
 } from "react-icons/tb";
 export default function AdminSlider() {
@@ -36,6 +37,20 @@ export default function AdminSlider() {
                 <span className="flex items-center gap-x-2">
                  
                   <TbCalendar className="size-5" /> الحجوزات
+                </span>
+              </NavLink>
+
+              <NavLink
+                to={"new-doctors"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "my-1  flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
+                    : "text-NavLink my-1 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
+                }
+              >
+                <span className="flex items-center gap-x-2">
+                  
+                  <TbUserPlus className="size-5" /> الطبات الواردة
                 </span>
               </NavLink>
 

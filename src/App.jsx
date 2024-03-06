@@ -37,6 +37,7 @@ import AdminUserDetails from './components/admin/AdminUserDetails.jsx';
 import AdminSuport from './components/admin/AdminSuport.jsx';
 import AdminAppointmetDetails from './components/admin/AdminAppointmetDetails.jsx';
 import AdminDoctorAds from './components/admin/AdminDoctorAds.jsx';
+import AdmainNewDoctors from './components/admin/AdmainNewDoctors.jsx';
 
 
 let Routers =createBrowserRouter([
@@ -79,6 +80,7 @@ let Routers =createBrowserRouter([
     {path:'user/:id' ,element:<AdminUserDetails/>},
     {path:'suport' ,element:<AdminSuport/>},
     {path:'doctor-ads' ,element:<AdminDoctorAds/>},
+    {path:'new-doctors' ,element:<AdmainNewDoctors/>},
 
   ]},
 

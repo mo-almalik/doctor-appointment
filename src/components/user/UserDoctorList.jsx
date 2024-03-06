@@ -4,9 +4,10 @@ import doct1 from '../../Assets/image/doc1.jpg'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { useDoctor } from '../../Context/doctor.js'
+import Loading from '../../utils/Loading.jsx'
 
 export default function UserDoctorList() {
- const {doctors ,GetDoctors} = useDoctor()
+ const {doctors ,GetDoctors ,loading} = useDoctor()
  useEffect(()=>{
   GetDoctors()
  },[])
@@ -18,7 +19,9 @@ export default function UserDoctorList() {
     <div className='grid grid-cols-4 gap-5 '>
       {doctors.map((item ,index)=><Link to={`/doctor/${item._id}`} key={index} >
       <div className='h-fit bg-gray-300  rounded-lg text-center'>
-       <img src={doct1} alt={item.username}  className='w-full rounded-lg' loading='true'/>
+        {loading ? loading : <>
+          <img src={doct1} alt={item.username}  className='w-full rounded-lg' />
+        </>}
        <h4 className='py-3 text-gray-700'> {item.username}</h4>
         </div>
       </Link>

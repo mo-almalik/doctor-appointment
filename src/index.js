@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import { AuthProvider } from './Context/auth.js';
 import { DoctorProvider } from './Context/doctor.js';
-import { AdminProvider } from './Context/admin.js';
 import { ErrorProvider } from './Context/error.js';
 
 
@@ -15,9 +14,9 @@ root.render(<>
 <ErrorProvider>
 <AuthProvider>
 <DoctorProvider>
-<AdminProvider>
+
  <App />
-</AdminProvider>
+
 </DoctorProvider>
 </AuthProvider>
 </ErrorProvider>

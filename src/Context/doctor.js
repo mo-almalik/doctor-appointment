@@ -10,10 +10,14 @@ export function DoctorProvider(props) {
     const [doctorInfo ,setDoctorInfo] = useState([])
     const [doctors ,setDoctors] = useState([])
     const [doctorMessage ,setDoctorMessage] = useState([])
-    // const [currentPage ,setCurrentPage]= useState(1)
-    // const[totalPages ,setTotalPages]= useState(1)
-    // const [onPageChange ,setOnPageChange]= useState()
+    const [adsDoctor,setAdsDoctor] = useState([])
+    const [currentPage ,setCurrentPage]= useState(1)
+    const[totalPages ,setTotalPages]= useState(1)
+    const [onPageChange ,setOnPageChange]= useState()
 
+    const handlePageChange = (pages) => {
+    setCurrentPage(pages);
+  };
  async function UpdateInfo (DoctorData){
   setLoading(true)
      await api.put('/doctor/update-profile',{
@@ -51,8 +55,21 @@ async function GetDoctors() {
   setLoading(false)
 }
 
+async function GetDoctorsAds(pages) {
+  setLoading(true)
+  const {data} = await api.get(`/doctor/ads?page=${pages}`).catch((e)=>console.log(e.response.data.message));
+  setAdsDoctor(data?.data.docs)
+  setTotalPages(data?.data.totalPages)
+  setLoading(false)
+}
 
-  return <DoctorContext.Provider value={{loading , UpdateInfo ,GetDoctorData ,doctorInfo , GetDoctors,doctors ,doctorMessage }}>
+
+  return <DoctorContext.Provider value={{loading , UpdateInfo ,GetDoctorData ,
+  doctorInfo , GetDoctors,doctors ,
+  doctorMessage ,GetDoctorsAds ,adsDoctor,
+  setCurrentPage,handlePageChange,currentPage,
+  totalPages
+  }}>
        {props.children}
     </DoctorContext.Provider>
  

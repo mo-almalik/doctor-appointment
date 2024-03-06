@@ -15,6 +15,7 @@ export default function DoctorAppointment() {
   const [loading, setLoading] = useState(false);
   const[totalPages ,setTotalPages]= useState(1)
   const [currentPage ,setCurrentPage]= useState(1)
+  
   const location = useLocation();
   const shouldDisplayTitle = location.pathname !== '/cms';
 
