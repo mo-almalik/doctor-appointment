@@ -170,9 +170,15 @@ export default function DoctorAppointment() {
               </tbody>
               
             </table> 
-            <Pagination currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange} />
+            <>
+          {appointment && appointment.length > 0 ? (
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={handlePageChange}
+  />
+) : null}
+          </>
           </>
         )}
       </div>

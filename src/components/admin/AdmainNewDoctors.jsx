@@ -82,11 +82,11 @@ export default function AdmainNewDoctors() {
             <tr className="py-5 ">
               <th className="py-5  border-gray-100"> #</th>
               <th className="py-5 border-gray-100">اسم الدكتور</th>
-              <th className="py-5  border-gray-100"> الموقع</th>
-              <th className="py-5  border-gray-100"> رقم الهاتف</th>
-              <th className="py-5  border-gray-100"> سعر المقابلة</th>
-              <th className="py-5  border-gray-100"> التخصص </th>
-              <th className="py-5  border-gray-100"> تاريخ الانضمام</th>
+              <th className="py-5 em:hidden sm:hidde border-gray-100"> الموقع</th>
+              <th className="py-5 em:hidden sm:hidde border-gray-100"> رقم الهاتف</th>
+              <th className="py-5 em:hidden sm:hidde border-gray-100"> سعر المقابلة</th>
+              <th className="py-5 em:hidden sm:hidde border-gray-100"> التخصص </th>
+              <th className="py-5 em:hidden sm:hidde border-gray-100"> تاريخ الانضمام</th>
               <th className="py-5  border-gray-100"> ... </th>
             </tr>
           </thead>
@@ -102,20 +102,20 @@ export default function AdmainNewDoctors() {
                     <td className="py-2   border-gray-100  border-b-2 ">
                       {item.username}
                     </td>
-                    <td className="py-2   border-gray-100  border-b-2  ">
+                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde  border-gray-100  border-b-2  ">
                       {item.location ? item.location : "-"}
                     </td>
-                    <td className="py-2   border-gray-100  border-b-2 ">
+                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde  border-gray-100  border-b-2 ">
                       {item.phone}
                     </td>
-                    <td className="py-2   border-gray-100  border-b-2 ">
+                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde  border-gray-100  border-b-2 ">
                       {item.price ? item.price : "-"}
                     </td>
-                    <td className="py-2   border-gray-100  border-b-2 ">
+                    <td className="py-2  em:hidden sm:hiddeem:hidden sm:hidde border-gray-100  border-b-2 ">
                       {item.specialization}
                     </td>
 
-                    <td className="py-2  border-gray-100  border-b-2   ">
+                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde border-gray-100  border-b-2   ">
                       <span
                         className={`bg-opacity-50 rounded-md text-[12px] p-2 `}
                       >
@@ -146,11 +146,15 @@ export default function AdmainNewDoctors() {
         </table>
         {shouldDisplayTitle && (
         
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <>
+          {doctors && doctors.length > 10 ? (
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={handlePageChange}
+  />
+) : null}
+          </>
         )}
       </>
     )}

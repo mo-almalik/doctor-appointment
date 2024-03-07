@@ -157,11 +157,13 @@ export default function AdminAppointments() {
                 )}
               </tbody>
             </table>
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
+            {appointment && appointment.length > 0 ? (
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={handlePageChange}
+  />
+) : null}
           </>
         )}
       </div>

@@ -15,14 +15,14 @@ export default function AdminSlider() {
   return <>
      <div className="flex flex-col justify-around my-5 text-sm">
           <div className="">
-            <ul className=" flex flex-col items-center text-md">
+            <div className=" flex flex-col items-center text-md">
               <NavLink
                 to='/admin'
                 className="text-NavLink my-1.5 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbLayoutGrid className="size-5" /> لوحة التحكم
+                  <TbLayoutGrid className="size-4" /> لوحة التحكم
                 </span>
               </NavLink>
 
@@ -36,7 +36,7 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                  
-                  <TbCalendar className="size-5" /> الحجوزات
+                  <TbCalendar className="size-4" /> الحجوزات
                 </span>
               </NavLink>
 
@@ -50,7 +50,7 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbUserPlus className="size-5" /> الطبات الواردة
+                  <TbUserPlus className="size-4" /> الطبات الواردة
                 </span>
               </NavLink>
 
@@ -64,7 +64,7 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbUser className="size-5" /> الأطباء
+                  <TbUser className="size-4" /> الأطباء
                 </span>
               </NavLink>
 
@@ -78,7 +78,7 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbClock className="size-5" />  المستخدمين
+                  <TbClock className="size-4" />  المستخدمين
                 </span>
               </NavLink>
               <NavLink
@@ -90,11 +90,11 @@ export default function AdminSlider() {
                 }
               >
                 <span className="flex items-center gap-x-2">
-                  <TbUserStar className="size-5" /> الأطباء المميزين
+                  <TbUserStar className="size-4" /> الأطباء المميزين
                 </span>
               </NavLink>
 
-              <NavLink
+              {/* <NavLink
                 to={"accounting"}
                 className={({ isActive }) =>
                   isActive
@@ -104,9 +104,9 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbCreditCard className="size-5" /> الحسابات
+                  <TbCreditCard className="size-4" /> الحسابات
                 </span>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 to={"accounting"}
                 className={({ isActive }) =>
@@ -117,7 +117,7 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbBrandGoogleAnalytics className="size-5" /> اعلانات
+                  <TbBrandGoogleAnalytics className="size-4" /> اعلانات
                 </span>
               </NavLink>
 
@@ -131,7 +131,7 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbLayoutGrid className="size-5" /> الأعدادات
+                  <TbLayoutGrid className="size-4" /> الأعدادات
                 </span>
               </NavLink>
 
@@ -145,10 +145,10 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbHelpCircle className="size-5" /> الدعم الفني
+                  <TbHelpCircle className="size-4" /> الدعم الفني
                 </span>
               </NavLink>
-            </ul>
+            </div>
           </div>
         </div>
   </>
