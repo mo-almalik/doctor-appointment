@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Loading from "../../utils/Loading.jsx";
 import { Helmet } from "react-helmet";
-import { useDoctor } from "../../Context/doctor.js";
+import { DoctorContext } from "../../Context/doctor.js";
 import { Link } from "react-router-dom";
 import { TbArrowLeft } from "react-icons/tb";
 import Pagination from "../../utils/Pagination.jsx";
@@ -14,7 +14,7 @@ export default function AdminDoctorAds() {
     handlePageChange,
     currentPage,
     totalPages,
-  } = useDoctor();
+  } = useContext(DoctorContext);
 
   useEffect(() => {
     GetDoctorsAds(currentPage);

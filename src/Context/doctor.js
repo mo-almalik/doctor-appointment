@@ -3,17 +3,18 @@ import { createContext, useContext, useState } from 'react';
 import api from '../services/api.js';
 
 
-const DoctorContext = createContext();
+export const DoctorContext = createContext();
 
 export function DoctorProvider(props) {
     const [loading ,setLoading] = useState(false)
     const [doctorInfo ,setDoctorInfo] = useState([])
+    const [doctorcount ,setDoctorcount] = useState([])
     const [doctors ,setDoctors] = useState([])
     const [doctorMessage ,setDoctorMessage] = useState([])
     const [adsDoctor,setAdsDoctor] = useState([])
     const [currentPage ,setCurrentPage]= useState(1)
     const[totalPages ,setTotalPages]= useState(1)
-    const [onPageChange ,setOnPageChange]= useState()
+
 
     const handlePageChange = (pages) => {
     setCurrentPage(pages);
@@ -27,7 +28,7 @@ export function DoctorProvider(props) {
     
     setTimeout(()=>{
       GetDoctorData()
-    },2000)
+    },1500)
 
     setTimeout(()=>{
       setLoading(false) 
@@ -41,7 +42,8 @@ async function GetDoctorData() {
   setLoading(true)
   const data = await api.get('/doctor/account').catch((e)=>console.log(e.response.data.message));
 
-    setDoctorInfo(data?.data)
+    setDoctorInfo(data?.data.data.data)
+    setDoctorcount(data?.data?.data.count)
     setDoctorMessage(data?.data.message)
 
   setLoading(false)
@@ -49,8 +51,8 @@ async function GetDoctorData() {
 
 async function GetDoctors() {
   setLoading(true)
-  const {data} = await api.get('/doctor/').catch((e)=>console.log(e.response.data.message));
-  setDoctors(data?.data.docs)
+  const data = await api.get('/doctor/').catch((e)=>console.log(e.response.data.message));
+  setDoctors(data?.data.data.docs)
 
   setLoading(false)
 }
@@ -68,17 +70,9 @@ async function GetDoctorsAds(pages) {
   doctorInfo , GetDoctors,doctors ,
   doctorMessage ,GetDoctorsAds ,adsDoctor,
   setCurrentPage,handlePageChange,currentPage,
-  totalPages
+  totalPages,doctorcount
   }}>
        {props.children}
     </DoctorContext.Provider>
  
-};
-
-export const useDoctor = () => {
-  const context = useContext(DoctorContext);
-  if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
 };

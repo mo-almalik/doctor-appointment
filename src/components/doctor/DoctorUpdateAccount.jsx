@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDoctor } from '../../Context/doctor.js';
+import { DoctorContext } from '../../Context/doctor.js';
 import { TbLoader } from 'react-icons/tb';
 import api from '../../services/api.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/auth.js';
 export default function DoctorUpdateAccount() {
-  const {UpdateInfo,loading  ,doctorInfo} = useDoctor()
+  const {UpdateInfo,loading  ,doctorInfo} = useContext(DoctorContext);
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
   const {logout} = useAuth()
@@ -46,6 +46,7 @@ const handeleDeleteAccount = async()=>{
   }
   
 }
+
 
 
   return <>

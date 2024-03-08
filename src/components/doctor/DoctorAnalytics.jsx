@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   TbArrowNarrowLeft,
   TbBriefcaseFilled,
@@ -6,18 +6,19 @@ import {
   TbLoader,
   TbUsersGroup,
 } from "react-icons/tb";
-import { useDoctor } from "../../Context/doctor.js";
+import { DoctorContext} from "../../Context/doctor.js";
 import { Link } from "react-router-dom";
 import { user } from "../../utils/auth.js";
 
 
 export default function DoctorAnalytics() {
 
-  const {doctorInfo ,doctorMessage ,loading ,GetDoctorData}= useDoctor()
+  const {doctorInfo ,doctorMessage ,loading ,GetDoctorData ,doctorcount}= useContext(DoctorContext);
 
   useEffect(()=>{
     GetDoctorData()
   },[])
+ const {appointmentCount ,patientCount ,totalAmount} = doctorcount
   return (
     <>
       {doctorMessage ? <>
@@ -58,7 +59,7 @@ export default function DoctorAnalytics() {
               </div>
               <h6 className="text-gray-500  mx-3">الحجوزات </h6>
             </div>
-           {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{doctorInfo.appointmentCount}</span> }  
+           {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{appointmentCount }</span> }  
             {/* <span className='text-green-500 flex items-center'>20 +<TbSquareRoundedArrowUpFilled className='w-5 h-5 ms-1' /></span> */}
           </div>
         </div>
@@ -71,7 +72,7 @@ export default function DoctorAnalytics() {
               <h6 className="text-gray-500 mx-3">المرضي</h6>
             </div>
 
-            {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{doctorInfo.patientCount}</span> }  
+            {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{patientCount}</span> }  
 
             {/* <span className='text-green-500 flex items-center'>20 +<TbSquareRoundedArrowUpFilled className='w-5 h-5 ms-1' /></span> */}
           </div>
@@ -85,12 +86,13 @@ export default function DoctorAnalytics() {
               <h6 className="text-gray-500 mx-3">الايرادات</h6>
             </div>
             
-            {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{doctorInfo.totalAmount} $</span> }  
+            {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{totalAmount} $</span> }  
 
             {/* <span className='text-red-500 flex items-center'>20 -<TbSquareRoundedArrowUpFilled className='w-5 h-5 ms-1 rotate-180' /></span> */}
           </div>
         </div>
-        <div className="bg-white  w-full em:w-full sm:w-full md:w-full rounded-md  p-5">
+        
+        {/* <div className="bg-white  w-full em:w-full sm:w-full md:w-full rounded-md  p-5">
           <div className="flex  justify-between items-center">
             <div className="flex items-center">
               <div className="bg-[#EBFFE8] w-12 h-12 flex justify-center items-center rounded-md text-[#14CC26]">
@@ -99,9 +101,10 @@ export default function DoctorAnalytics() {
               <h6 className="text-gray-500 mx-3">الايرادات</h6>
             </div>
             <h6 className="text-gray-900 font-bold">50002 $</h6>
-            {/* <span className='text-red-500 flex items-center'>20 -<TbSquareRoundedArrowUpFilled className='w-5 h-5 ms-1 rotate-180' /></span> */}
+            
           </div>
-        </div>
+        </div> */}
+
       </div>
 
 

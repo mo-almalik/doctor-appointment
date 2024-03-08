@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DoctorUpdateAccount from './DoctorUpdateAccount.jsx';
 import DoctorAppointmentSetting from './DoctorAppointmentSetting.jsx';
 import DoctorPasswordChenge from './DoctorPasswordChenge.jsx';
-import { useDoctor } from '../../Context/doctor.js';
+import { DoctorContext} from '../../Context/doctor.js';
 
 
 const AccountSection = () => <div><DoctorUpdateAccount/> </div>;
@@ -10,7 +10,7 @@ const SettingsSection = () => <div><DoctorAppointmentSetting /> </div>;
 const ReviewsSection = () => <div>محتوى التقييمات</div>;
 const PasswordChange = () => <div> <DoctorPasswordChenge /> </div>;
 export default function DoctorSetting() {
-  const {doctorInfo,loading,GetDoctorData} = useDoctor() 
+  const {doctorInfo,loading,GetDoctorData} =useContext(DoctorContext);
   const [activeSection, setActiveSection] = useState('التقييمات');
   const sections = {
     'حسابي': AccountSection,

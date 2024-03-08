@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect} from 'react'
 import { TbArrowNarrowLeft } from "react-icons/tb";
-import api from '../../services/api.js';
+
 import { Link } from 'react-router-dom';
 import doct1 from '../../Assets/image/doc2.jpg'
 import { Helmet } from 'react-helmet';
-import { useDoctor } from '../../Context/doctor.js';
+import { DoctorContext} from '../../Context/doctor.js';
 export default function UserHome() {
-  const {doctors ,GetDoctors} = useDoctor()
+  const {doctors ,GetDoctors} = useContext(DoctorContext);
  useEffect(()=>{
   GetDoctors()
  },[])

@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 import {
   TbBrandGoogleAnalytics,
   TbCalendar,
+  TbChartDonut,
+  TbCircleMinus,
   TbClock,
-  TbCreditCard,
   TbHelpCircle,
   TbLayoutGrid,
   TbUser,
@@ -93,9 +94,8 @@ export default function AdminSlider() {
                   <TbUserStar className="size-4" /> الأطباء المميزين
                 </span>
               </NavLink>
-
-              {/* <NavLink
-                to={"accounting"}
+              <NavLink
+                to={"Blocklist"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
@@ -104,9 +104,23 @@ export default function AdminSlider() {
               >
                 <span className="flex items-center gap-x-2">
                   
-                  <TbCreditCard className="size-4" /> الحسابات
+                  <TbChartDonut   className="size-4" />  الأحصائيات
                 </span>
-              </NavLink> */}
+              </NavLink>
+
+              <NavLink
+                to={"Blocklist"}
+                className={({ isActive }) =>
+                  isActive
+                    ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
+                    : "text-NavLink my-1.5 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
+                }
+              >
+                <span className="flex items-center gap-x-2">
+                  
+                  <TbCircleMinus  className="size-4" /> قائمة الحظر
+                </span>
+              </NavLink>
               <NavLink
                 to={"accounting"}
                 className={({ isActive }) =>

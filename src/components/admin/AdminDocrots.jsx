@@ -34,6 +34,7 @@ export default function AdminDocrots() {
     getAllDocotrs(currentPage);
   }, [currentPage]);
 
+ 
   return (
     <>
       {shouldDisplayTitle && (

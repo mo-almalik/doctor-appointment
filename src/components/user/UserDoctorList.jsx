@@ -1,13 +1,13 @@
-import React, { useEffect} from 'react'
+import React, { useContext, useEffect} from 'react'
 
 import doct1 from '../../Assets/image/doc1.jpg'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { useDoctor } from '../../Context/doctor.js'
+import { DoctorContext } from '../../Context/doctor.js'
 import Loading from '../../utils/Loading.jsx'
 
 export default function UserDoctorList() {
- const {doctors ,GetDoctors ,loading} = useDoctor()
+ const {doctors ,GetDoctors ,loading} = useContext(DoctorContext);
  useEffect(()=>{
   GetDoctors()
  },[])

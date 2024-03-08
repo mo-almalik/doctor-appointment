@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDoctor } from '../../Context/doctor.js';
+import { DoctorContext} from '../../Context/doctor.js';
 import { TbLoader } from 'react-icons/tb';
 import api from '../../services/api.js';
 export default function DoctorAppointmentSetting() {
-  const {UpdateInfo ,loading,doctorInfo} = useDoctor()
+  const {UpdateInfo ,loading,doctorInfo} = useContext(DoctorContext);
  
 
   let initialValues = {
