@@ -3,9 +3,10 @@ import UserAddAppointment from './UserAddAppointment.jsx'
 import { useParams } from 'react-router-dom';
 import api from '../../services/api.js';
 import { Helmet } from 'react-helmet';
-import { TbJewishStar, TbLoader } from 'react-icons/tb';
+import { TbLoader } from 'react-icons/tb';
 import UserReview from './Userreview.js';
 import getStarIcons from './Userreview.js';
+
 
 export default function UserDoctorDetails() {
   const [doctor ,setDoctor] = useState([])
@@ -14,11 +15,11 @@ const [loading ,setLoading] = useState(false)
   const { id } = useParams();
   const getData = async(id) =>{
     setLoading(true)
-  const {data} = await api.get(`/doctor/info/${id}`).catch((error)=>console.log(error))
-  
-  setDoctor(data.data?.info)
-  setReview(data.data?.review)
+  const data = await api.get(`/doctor/info/${id}`).catch((error)=>console.log(error))
+   setDoctor(data.data.data?.info)
+  setReview(data.data.data?.review)
   setLoading(false)
+ 
 
   }
   useEffect(()=>{

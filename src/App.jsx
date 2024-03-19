@@ -38,6 +38,11 @@ import AdminSuport from './components/admin/AdminSuport.jsx';
 import AdminAppointmetDetails from './components/admin/AdminAppointmetDetails.jsx';
 import AdminDoctorAds from './components/admin/AdminDoctorAds.jsx';
 import AdmainNewDoctors from './components/admin/AdmainNewDoctors.jsx';
+import AdminBlocklist from './components/admin/AdminBlocklist.jsx';
+import AdminChart from './components/admin/AdminChart.jsx';
+import Register from './auth/Register/Register.jsx';
+
+
 
 
 let Routers =createBrowserRouter([
@@ -81,11 +86,15 @@ let Routers =createBrowserRouter([
     {path:'suport' ,element:<AdminSuport/>},
     {path:'doctor-ads' ,element:<AdminDoctorAds/>},
     {path:'new-doctors' ,element:<AdmainNewDoctors/>},
+    {path:'Blocklist' ,element:<AdminBlocklist/>},
+    {path:'chart' ,element:<AdminChart/>},
+   
 
   ]},
 
   // public page 
   {path:'login' ,element:<Login/>},
+  {path:'register' ,element:<Register/>},
   // not found page
   {path:"*",element:<NotFound />},
 ])
@@ -108,6 +117,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 theme="light"
+className={'text-sm'}
 
         />
   </>

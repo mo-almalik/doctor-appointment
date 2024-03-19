@@ -1,13 +1,14 @@
 
-import { createContext, useContext, useState } from 'react';
+import { createContext,  useState } from 'react';
 import api from '../services/api.js';
 
 
 export const DoctorContext = createContext();
 
-export function DoctorProvider(props) {
+export function DoctorProvider({children}) {
     const [loading ,setLoading] = useState(false)
     const [doctorInfo ,setDoctorInfo] = useState([])
+    const [blocklist ,setBlocklist] = useState([])
     const [doctorcount ,setDoctorcount] = useState([])
     const [doctors ,setDoctors] = useState([])
     const [doctorMessage ,setDoctorMessage] = useState([])
@@ -44,7 +45,7 @@ async function GetDoctorData() {
 
     setDoctorInfo(data?.data.data.data)
     setDoctorcount(data?.data?.data.count)
-    setDoctorMessage(data?.data.message)
+    setDoctorMessage(data.data.data.message)
 
   setLoading(false)
 }
@@ -66,13 +67,14 @@ async function GetDoctorsAds(pages) {
 }
 
 
+
   return <DoctorContext.Provider value={{loading , UpdateInfo ,GetDoctorData ,
   doctorInfo , GetDoctors,doctors ,
   doctorMessage ,GetDoctorsAds ,adsDoctor,
   setCurrentPage,handlePageChange,currentPage,
-  totalPages,doctorcount
+  totalPages,doctorcount ,
   }}>
-       {props.children}
+       {children}
     </DoctorContext.Provider>
  
 };

@@ -5,7 +5,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <div className="flex gap-x-3 p-2 bg-white py-3">
+    <div className="flex gap-x-3 p-2 bg-white py-3 items-center justify-center mb-10">
       {pages.map((page) => (
         <div
           key={page}

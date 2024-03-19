@@ -95,7 +95,7 @@ export default function AdminSlider() {
                 </span>
               </NavLink>
               <NavLink
-                to={"Blocklist"}
+                to={"chart"}
                 className={({ isActive }) =>
                   isActive
                     ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"

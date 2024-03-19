@@ -6,12 +6,14 @@ import doct1 from '../../Assets/image/doc2.jpg'
 import { Helmet } from 'react-helmet';
 import { DoctorContext} from '../../Context/doctor.js';
 export default function UserHome() {
-  const {doctors ,GetDoctors} = useContext(DoctorContext);
+  const {doctors ,GetDoctors ,adsDoctor,GetDoctorsAds} = useContext(DoctorContext);
  useEffect(()=>{
   GetDoctors()
+  GetDoctorsAds()
  },[])
   
 
+ console.log(adsDoctor);
   return <>
   <Helmet>
     <title>عافية</title>
@@ -51,8 +53,30 @@ export default function UserHome() {
         </div>
     </div>
 
-    <div className='container mx-auto mt-10'>
+
+
+{/* ads doctor */}
+{adsDoctor && adsDoctor.length  > 0 ? <> 
+  <div className='container mx-auto mt-10'>
       <h4 className='mb-7 text-md font-semibold text-main-400'>الاطباء المميزين</h4>
+
+      <div className='grid grid-cols-4 gap-5 '>
+      {adsDoctor.map((item)=>(
+        <Link to={`/doctor/${item._id}`} key={item._id} >
+      <div className='h-fit bg-white  rounded-lg text-center p-5'>
+       <img src={doct1} alt={item.username}  className='w-full rounded-lg'/>
+       <h4 className='py-3 text-gray-700'> {item.username}</h4>
+        </div>
+      </Link>
+      ))}
+    </div>
+    </div>
+</> : null }
+
+{/* doctor  */}
+{doctors && doctors.length > 0 ? <>
+  <div className='container mx-auto mt-10'>
+      <h4 className='mb-7 text-md font-semibold text-main-400'>الاطباء </h4>
 
       <div className='grid grid-cols-4 gap-5 '>
       {doctors.map((item)=>(
@@ -65,6 +89,7 @@ export default function UserHome() {
       ))}
     </div>
     </div>
+</> :<h6 className='text-gray-500  mx-10 py-5'>لايوجد اطباء </h6>}
   
   </>
     

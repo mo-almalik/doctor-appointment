@@ -30,4 +30,14 @@ tr
 th{
     font-weight: normal;
     font-size: 15px;
+   
+}
+table
+tbody
+tr
+td{
+    font-weight: normal;
+    font-size: 15px;
+    color: #707070;
+   
 }

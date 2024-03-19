@@ -14,7 +14,7 @@ import { user } from "../../utils/auth.js";
 export default function DoctorAnalytics() {
 
   const {doctorInfo ,doctorMessage ,loading ,GetDoctorData ,doctorcount}= useContext(DoctorContext);
-
+console.log(doctorMessage);
   useEffect(()=>{
     GetDoctorData()
   },[])

@@ -22,9 +22,9 @@ export default function AdminAppointments() {
     canceled: "ملغي",
   };
   const statusColors = {
-    pending: "bg-green-500 ",
-    confirmed: "bg-main-500",
-    canceled: "bg-yellow-500",
+    pending: "bg-green-200 bg-opacity-100 text-gray-800 ",
+    confirmed: "bg-main-200 bg-opacity-100 text-gray-800",
+    canceled: "bg-yellow-200 bg-opacity-100 text-gray-800",
   };
   //get all appoientment
   async function getAllAppoientment(pages) {
@@ -55,11 +55,11 @@ export default function AdminAppointments() {
         <h3> الحجوزات</h3>
         {/* filter */}
         <div className="bg-white  my-2 rounded-md flex items-center justify-between em:flex-col sm:flex-col  gap-3 p-5">
-          <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm em:w-full sm:w-full">
+          <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm w-[20%] em:w-full sm:w-full">
             اضافة حجز جديد
           </button>
           <div className="">
-            <form className="flex items-center em:flex-col sm:flex-col gap-3">
+            <form className="flex items-center em:flex-col sm:flex-col gap-3 ">
               <input
                 placeholder="اسم الطبيب"
                 className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
@@ -104,7 +104,7 @@ export default function AdminAppointments() {
                   <th className="py-5   border-gray-100"> النوع</th>
                   <th className="py-5   border-gray-100"> تاريخ الحجز</th>
                   <th className="py-5   border-gray-100"> حالة الطلب</th>
-                  <th className="py-5   border-gray-100"> التفاصيل</th>
+                
                 </tr>
               </thead>
 
@@ -139,16 +139,13 @@ export default function AdminAppointments() {
 
                         <td className="py-2  border-gray-100  border-b-2   ">
                           <span
-                            className={`bg-opacity-50 rounded-md text-[12px] p-2 ${
-                              statusColors[item.status]
-                            }`}
+                            className={` rounded-full px-5 text-[12px] p-2 ${statusColors[item.status]
+                              }`}
                           >
                             {status[item.status]}
                           </span>
                         </td>
-                        <td className="py-2  cursor-pointer  border-gray-100  border-b-2  ">
-                          <button>عرض</button>
-                        </td>
+                        
                       </tr>
                     ))}
                   </>
@@ -158,12 +155,12 @@ export default function AdminAppointments() {
               </tbody>
             </table>
             {appointment && appointment.length > 0 ? (
-  <Pagination
-    currentPage={currentPage}
-    totalPages={totalPages}
-    onPageChange={handlePageChange}
-  />
-) : null}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            ) : null}
           </>
         )}
       </div>

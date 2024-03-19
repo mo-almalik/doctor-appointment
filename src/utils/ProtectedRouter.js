@@ -1,6 +1,7 @@
 import React from 'react'
 import {  Navigate } from 'react-router-dom';
 import {  isAuthenticated, userRole } from './auth.js';
+import NotFound from '../components/common/NotFound.jsx';
 
 
 
@@ -21,7 +22,7 @@ const Role = userRole()
     if(isAuthenticated() && Role === 'admin'){
         return props.children
     }else{
-        return <Navigate to={'/'}/>
+        return <NotFound/>
 
     }
 }
@@ -30,7 +31,7 @@ const Role = userRole()
     if(isAuthenticated() && Role === 'doctor'){
         return props.children
     }else{
-        return <Navigate to={'/'}/>
+        return <NotFound/>
 
     }
 }
