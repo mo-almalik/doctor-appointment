@@ -57,6 +57,8 @@ let Routers =createBrowserRouter([
     {path:'doctor/:id' ,element: <UserDoctorDetails />},
     {path:'all-appointment' ,element:<UserRouter><UserAppointment /></UserRouter>},
     {path:'appointment/:id' ,element:<UserRouter><UserAppointmentDetails /></UserRouter>},
+    {path:'login' ,element:<Login/>},
+    {path:'register' ,element:<Register/>},
     
   ]},
 

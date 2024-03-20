@@ -113,7 +113,7 @@ async function RemoveAds(id) {
     GetDoctor(id);
   }, []);
 
-  const { username, email,  location, price, isBlock, createdAt, ads ,phone ,bio } =
+  const { username, email,  location, price, isBlock, createdAt, ads ,phone ,bio ,accountComplite } =
     doctorAccount;
 
   return (
@@ -159,6 +159,8 @@ async function RemoveAds(id) {
                     {isBlock ? "إلغاء الحظر" : "حظر"}
                   </button>
 
+        
+
                   <button
                     className={`w-fit h-8 px-5 text-white text-sm rounded-md ${
                       ads ? "bg-main-300" : "bg-main"
@@ -170,6 +172,15 @@ async function RemoveAds(id) {
                     {ads ? "إلغاء التميز" : "اضافة الي التميز "}
                   </button>
                    </div>
+
+                   <div>
+                     <h6 className="text-sm text-gray-500">
+                      حالة الحساب : 
+                      <span className={`text-sm mx-2   ${accountComplite  ? 'text-green-400' : 'text-gray-400'}`}>
+                        {accountComplite ? 'مكتمل' : 'غير مكتمل'}
+                      </span>
+                     </h6>
+                  </div>
                  </div>
                  <div className="my-5 flex flex-col gap-4 items-start em:items-center sm:items-center  text-gray-500 text-sm">
                  <h3 > د / {username}</h3>
@@ -209,7 +220,7 @@ async function RemoveAds(id) {
           </>
         ) : (
           <>
-           <h4 className="my-2">الحجوزات</h4>
+           <h4 className="my-2 text-gray-500">الحجوزات</h4>
             <table className="w-full bg-white overflow-auto mx-auto rounded-md text-center text-gray-600">
               <thead className=" border-gray-100  border-b-2 rounded-md">
                 <tr className="py-5 text-sm">

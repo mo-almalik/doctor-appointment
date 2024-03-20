@@ -1,15 +1,17 @@
 import React from 'react'
 import {  Navigate } from 'react-router-dom';
-import {  isAuthenticated, userRole } from './auth.js';
+import {  isAuthenticated, user } from './auth.js';
 import NotFound from '../components/common/NotFound.jsx';
 
 
 
-const Role = userRole()
+const Role = user()
+
+
 
 
   function UserRouter(props) {
-    if(isAuthenticated() && Role === 'user'){
+    if(isAuthenticated() && Role.role === 'user'){
         
         return props.children
     }else{
@@ -19,7 +21,7 @@ const Role = userRole()
 
 }
  function AdminRouter(props) {
-    if(isAuthenticated() && Role === 'admin'){
+    if(isAuthenticated() && Role.role === 'admin'){
         return props.children
     }else{
         return <NotFound/>
@@ -28,7 +30,7 @@ const Role = userRole()
 }
 
  function DoctorRouter(props) {
-    if(isAuthenticated() && Role === 'doctor'){
+    if(isAuthenticated() && Role.role === 'doctor'){
         return props.children
     }else{
         return <NotFound/>

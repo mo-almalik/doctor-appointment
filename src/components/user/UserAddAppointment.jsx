@@ -83,6 +83,7 @@ UserAddAppointment() {
         تفاصيل الحجز
       </h5>
       <form className="my-5" onSubmit={formik.handleSubmit}>
+      {error}
         <div className="my-2">
           <label htmlFor="name" className="text-gray-700 ">
             اسم المريض

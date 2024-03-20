@@ -61,7 +61,7 @@ export default function Login() {
 
   
   return <>
-    <Navbar />
+    {/* <Navbar /> */}
     <div className="flex justify-center items-center container w-full mx-auto bg-gray-100 shadow-sm rounded-lg py-5 my-5 gap-4">
       {isAuthenticated() ? (
         <>
@@ -75,8 +75,8 @@ export default function Login() {
             <p className="text-gray-400 mt-2">اهلا بك </p>
             {error !== null ? (
               <div className="bg-red-400 text-white my-2 rounded-md  px-2">
-                {" "}
-                <i className="fa-solid fa-exclamation mx-2 errorLogin"></i>{" "}
+                
+                <i className="fa-solid fa-exclamation mx-2 errorLogin"></i>
                 {error}
               </div>
             ) : (
@@ -120,12 +120,12 @@ export default function Login() {
                 className="bg-main  px-5 text-white w-1/2 mx-auto py-2 rounded-md"
                 type="submit"
               >
-                {" "}
-                دخول{" "}
+                
+                دخول
               </button>
             </form>
-            <Link to="register" className="text-gray-500 mt-2">
-              {" "}
+            <Link to="/register" className="text-gray-500 mt-2">
+              
               انشي حساب ؟
             </Link>
           </div>
