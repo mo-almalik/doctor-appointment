@@ -7,6 +7,7 @@ import api from '../../services/api.js';
 import { toast } from 'react-toastify';
 
 import docForm from '../../Assets/image/Parents-pana.svg'
+import Navbar from '../../components/common/Navbar.jsx';
 export default function Register() {
     const [error, setError] = useState(null);
 let navigate =  useNavigate();
@@ -54,7 +55,7 @@ let navigate =  useNavigate();
 <Helmet>
     <title>انشاء حساب</title>
 </Helmet>
-
+<Navbar />
 <div className="flex my-3 em:flex-col sm:flex-col justify-center items-center container w-full mx-auto   h-screen">
  <div className='w-[40%] em:w-full sm:w-full'>
     <img src={docForm} alt='Doctor' className='w-full' />

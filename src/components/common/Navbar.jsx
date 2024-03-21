@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, redirect } from 'react-router-dom'
 import logo from '../../logo.svg'
-import { isAuthenticated,  user} from '../../utils/auth.js';
+import {  isAuthenticated,  user} from '../../utils/auth.js';
 import { useAuth } from '../../Context/auth.js';
 export default function Navbar() {
   
@@ -21,6 +21,8 @@ export default function Navbar() {
    return redirect('/login')
 }
 const User = user()
+
+
   return <>
     <div className='  py-4'>
       <div className='container m-auto'>

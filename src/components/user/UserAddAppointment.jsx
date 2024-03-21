@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Link, useParams } from "react-router-dom";
 import api from "../../services/api.js";
 import { toast } from 'react-toastify';
-import { isAuthenticated, userRole } from "../../utils/auth.js";
+import { getToken, isAuthenticated, userRole } from "../../utils/auth.js";
 import Loading from "../../utils/Loading.jsx";
 export default function 
 UserAddAppointment() {
@@ -83,7 +83,7 @@ UserAddAppointment() {
         تفاصيل الحجز
       </h5>
       <form className="my-5" onSubmit={formik.handleSubmit}>
-      {error}
+     <span className="text-sm text-red-400"> {error}</span>
         <div className="my-2">
           <label htmlFor="name" className="text-gray-700 ">
             اسم المريض

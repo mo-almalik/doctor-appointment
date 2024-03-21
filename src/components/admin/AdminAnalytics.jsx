@@ -10,6 +10,7 @@ import {
 import { useError } from "../../Context/error.js";
 import ErrorPage from "../../utils/ErrorPage.jsx";
 import api from "../../services/api.js";
+import LineChart from "../Charts/LineChart.jsx";
  
 export default function AdminAnalytics() {
   const { handleError } = useError();
@@ -32,6 +33,7 @@ export default function AdminAnalytics() {
     getCount();
   }, []);
 
+ 
   return (
     <>
       <div>{error && <ErrorPage message={error} />}</div>
@@ -126,7 +128,7 @@ export default function AdminAnalytics() {
       </div>
 
       <div className="w-full h-80 bg-white rounded-md">
-        AdminChart  
+        <LineChart />  
       </div>
     </>
   );

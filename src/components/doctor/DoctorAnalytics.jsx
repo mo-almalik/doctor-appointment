@@ -9,12 +9,12 @@ import {
 import { DoctorContext} from "../../Context/doctor.js";
 import { Link } from "react-router-dom";
 import { user } from "../../utils/auth.js";
+import DoctorChart from "../Charts/DoctorChart.jsx";
 
 
 export default function DoctorAnalytics() {
 
   const {doctorInfo ,doctorMessage ,loading ,GetDoctorData ,doctorcount}= useContext(DoctorContext);
-console.log(doctorMessage);
   useEffect(()=>{
     GetDoctorData()
   },[])
@@ -109,9 +109,7 @@ console.log(doctorMessage);
 
 
 
-      <div className="w-full h-80 bg-white rounded-md">
-        
-      </div>
+    
     </>
   );
 }

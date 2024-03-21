@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useAuth } from '../../Context/auth.js';
 import { useNavigate } from 'react-router-dom';
 import { TbArrowBarLeft, TbMarquee2 } from 'react-icons/tb';
-import { userRole } from '../../utils/auth.js';
+import { user } from '../../utils/auth.js';
 
 
 
@@ -12,18 +12,19 @@ export default function Header() {
  
   const {logout} = useAuth()
   let navigate =  useNavigate();
+  const Role = user()
   
   const handleLogout = () => {
     logout();
-    if(userRole() === 'doctor'){
+    if(Role.role === 'doctor'){
       return navigate('/doctor/login')
     }
-    if(userRole() === 'admin' || 'user' ){
+    if(Role.role === 'admin' || 'user' ){
      return navigate('/login')
     }
    
   };
-  
+
 
 
   const toggleFullscreen = () => {
@@ -58,7 +59,7 @@ export default function Header() {
       
       <div className=' flex items-center  gap-x-2 justify-center'>
         <button onClick={()=>toggleFullscreen()} title='تكبير الشاشة'><TbMarquee2 className='text-[23px]' /></button>
-        <button onClick={()=>handleLogout()} className=' flex items-center  gap-x-2 justify-center hover:bg-gray-400 hover:text-white px-5 rounded-md duration-300'>  جروج <TbArrowBarLeft /></button>
+        <button onClick={()=>handleLogout()} className=' flex items-center  gap-x-2 justify-center hover:bg-gray-400 hover:text-white px-5 rounded-md duration-300'>  خروج <TbArrowBarLeft /></button>
       </div>
 
     </div>

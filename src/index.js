@@ -10,7 +10,8 @@ import { ErrorProvider } from './Context/error.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<>
+root.render(
+
 <ErrorProvider>
 <AuthProvider>
 <DoctorProvider>
@@ -20,7 +21,8 @@ root.render(<>
 </DoctorProvider>
 </AuthProvider>
 </ErrorProvider>
-</>
+
+
 );
 
 

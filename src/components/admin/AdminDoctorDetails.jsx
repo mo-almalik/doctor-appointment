@@ -330,7 +330,7 @@ async function RemoveAds(id) {
 
                         <td className="py-2  border-gray-100  border-b-2   ">
                           <span
-                            className={`bg-opacity-50 rounded-md text-[12px] p-2 ${statusColors[item.status]
+                            className={`bg-opacity-50 rounded-full px-5 text-[12px] p-2 ${statusColors[item.status]
                               }`}
                           >
                             {appointmentstatus[item.status]}

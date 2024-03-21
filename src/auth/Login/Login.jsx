@@ -5,6 +5,7 @@ import { saveAuthData, isAuthenticated, userRole } from "../../utils/auth.js";
 import api from "../../services/api.js";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/common/Navbar.jsx";
+
 export default function Login() {
   const [error, setError] = useState(null);
   let navigate =  useNavigate();
@@ -37,8 +38,8 @@ export default function Login() {
       saveAuthData(token);
    
       if (isAuthenticated()) {
-      
-        switch (userRole) {
+        const Role = user()
+        switch (Role.role) {
           case 'admin':
             navigate('/admin');
             break;
@@ -47,7 +48,7 @@ export default function Login() {
             break;
          
           default:
-            // يمكنك إضافة سلوك إضافي هنا إذا لزم الأمر
+         
         }
       }
     }
@@ -61,7 +62,7 @@ export default function Login() {
 
   
   return <>
-    {/* <Navbar /> */}
+    <Navbar />
     <div className="flex justify-center items-center container w-full mx-auto bg-gray-100 shadow-sm rounded-lg py-5 my-5 gap-4">
       {isAuthenticated() ? (
         <>

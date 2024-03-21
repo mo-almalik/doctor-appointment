@@ -18,7 +18,7 @@ import {DoctorRouter,UserRouter,AdminRouter} from './utils/ProtectedRouter.js';
 import UserAppointmentDetails from './components/user/UserAppointmentDetails.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getToken } from './utils/auth.js';
+import { getToken  } from './utils/auth.js';
 import { useEffect } from 'react';
 import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
 import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
@@ -57,8 +57,7 @@ let Routers =createBrowserRouter([
     {path:'doctor/:id' ,element: <UserDoctorDetails />},
     {path:'all-appointment' ,element:<UserRouter><UserAppointment /></UserRouter>},
     {path:'appointment/:id' ,element:<UserRouter><UserAppointmentDetails /></UserRouter>},
-    {path:'login' ,element:<Login/>},
-    {path:'register' ,element:<Register/>},
+
     
   ]},
 
@@ -106,7 +105,6 @@ useEffect(()=>{
 },[])
 
   return<>
-   
     <RouterProvider router={Routers}></RouterProvider>
     <ToastContainer 
       position="top-right"
