@@ -11,10 +11,14 @@ export default function AdminDoctorDetails() {
   const [doctorAccount, setDoctorAccount] = useState([]);
   const [appointment, setAppointment] = useState([]);
   const [currentPage ,setCurrentPage]= useState(1)
-    const[totalPages ,setTotalPages]= useState(1)
+  const[totalPages ,setTotalPages]= useState(1)
   const [loading, setLoading] = useState(false);
+  const [time ,setTime] = useState([]);
+
   const { id } = useParams();
-  console.log(appointment);
+
+  
+
   async function GetDoctor(id) {
     setLoading(true);
     const {data} = await api.get(`/admin/doctor/${id}`).catch((e) => {
@@ -23,13 +27,14 @@ export default function AdminDoctorDetails() {
     if (data) {
       
         setDoctorAccount(data?.data.info);
+        setTime(data?.data.time);
         setAppointment(data?.data.appointment.docs);
         setTotalPages(data?.data.appointment.totalPages)
       
       setLoading(false);
     }
   }
-
+ 
   async function AddToBlocklist(id) {
     setLoading(true);
     const data = await api
@@ -106,6 +111,15 @@ async function RemoveAds(id) {
     canceled: "bg-yellow-500",
   };
 
+  const days = {
+    Monday: 'الإثنين',
+    Tuesday: 'الثلاثاء',
+    Wednesday: 'الأربعاء',
+    Thursday: 'الخميس',
+    Friday: 'الجمعة',
+    Saturday: 'السبت',
+    Sunday: 'الأحد',
+  };
   const handlePageChange = (pages) => {
     setCurrentPage(pages);
   };
@@ -131,8 +145,8 @@ async function RemoveAds(id) {
       </Helmet>
 
     
-          <div className=" w-full py-9 mb-10 mx-auto em:text-center sm:text-center">
-            <div className="flex em:flex-col sm:flex-col w-full py-10 rounded-md justify-center items-start gap-x-10 bg-white em:items-center sm:items-center ">
+          <div className=" w-full py-9 mb-10 mx-auto em:text-center sm:text-center flex em:flex-col sm:flex-col gap-5" >
+            <div className="flex em:flex-col sm:flex-col w-full py-10  rounded-md justify-center items-start gap-x-10 bg-white em:items-center sm:items-center ">
               {loading ? (
                 <>
                 <div className="w-full flex justify-center items-center  ">
@@ -141,15 +155,16 @@ async function RemoveAds(id) {
                 </>
               ) : (
                 <>
-                 <div className="flex flex-col gap-5 items-start ">
+                <div className="flex flex-col">
+                <div className="flex flex-col gap-5 items-center w-full ">
                  <img
                     src={doct1}
                     alt={username}
                     className="w-40 rounded-full object-cover h-40"
                   />
-                   <div className="flex gap-4">
+                   <div className="flex gap-x-3">
                    <button
-                    className={`w-fit h-8 px-5 text-white text-sm rounded-md ${
+                    className={`w-fit h-8 px-2 text-white text-sm rounded-md ${
                       isBlock ? "bg-main" : "bg-red-400"
                     }`}
                     onClick={() => {
@@ -162,7 +177,7 @@ async function RemoveAds(id) {
         
 
                   <button
-                    className={`w-fit h-8 px-5 text-white text-sm rounded-md ${
+                    className={`w-fit h-8 px-2 text-white text-sm rounded-md ${
                       ads ? "bg-main-300" : "bg-main"
                     }`}
                     onClick={() => {
@@ -182,7 +197,7 @@ async function RemoveAds(id) {
                      </h6>
                   </div>
                  </div>
-                 <div className="my-5 flex flex-col gap-4 items-start em:items-center sm:items-center  text-gray-500 text-sm">
+                 <div className=" my-5 flex flex-col gap-4 items-center em:items-center sm:items-center w-full  text-gray-500 text-sm">
                  <h3 > د / {username}</h3>
                   <h3 >  البريد الالكتروني    :  {email}</h3>
                   <h3 > رقم الهاتف  :  {phone}</h3>
@@ -202,12 +217,63 @@ async function RemoveAds(id) {
                     {bio}
                   </p>
                  </div>
+                </div>
                   
                 </>
               )} 
-            
-            </div> 
-           
+             
+            </div>  
+            <div className="w-[55%] h-fit rounded-md bg-white text-center  py-10 em:w-full sm:w-full  overflow-y-auto scrollbar-thin">
+              <h4> اوقات العمل </h4>
+          <div className="flex flex-col justify-center gap-4  mt-5 w-[90%] mx-auto text-sm">
+            {loading ? (
+              <>
+              <div className="w-full flex justify-center items-center  ">
+              <Loading />
+            </div>
+              </>
+            ) : (
+              <>
+                {time && time.length > 0  ? (
+                  <>
+                    {time.map((item, index) => (
+                      <div
+                        key={index}
+                        className="bg-gray-200 bg-opacity-60 rounded-md px-5"
+                      >
+                        <div className="my-5 flex justify-between em:flex-col sm:flex-col em:text-center sm:text-center gap-3 ">
+                          <div>{days[item.day]} </div>
+                          <div className="flex justify-center gap-2 em:flex-col sm:flex-col">
+                            
+                            <span className="bg-green-300 bg-opacity-50 p-1 rounded-md ">
+                              
+                              <span className="mx-2 text-sm">
+                                زمن البدء
+                              </span> - {item.startTime}
+                            </span>
+                            <span className="bg-gray-300 bg-opacity-50 p-1 rounded-md ">
+                              
+                              <span className="mx-2 text-sm">
+                                زمن الانتهاء
+                              </span>
+                              - {item.endTime}
+                            </span>
+                          </div>
+                         
+                        </div>
+                      </div>
+                      
+                    ))}
+                  </>
+                ) : (
+                  <span className="text-gray-500">
+                   لم يتم اضافة توقيت
+                  </span>
+                )}
+              </>
+            )}
+          </div>      
+              </div>
            
           </div>
     

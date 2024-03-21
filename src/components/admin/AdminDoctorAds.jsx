@@ -33,9 +33,11 @@ export default function AdminDoctorAds() {
               عرض كل الأطباء المميزين{" "}
             </p>
           </div>
-          <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm">
+          <Link to={'/admin/doctors'} >
+          <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm" >
             اضافة طبيب مميز
           </button>
+          </Link>
         </div>
 
         {loading ? (

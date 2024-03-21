@@ -51,6 +51,7 @@ export default function DoctorAppointment() {
     }, 1000);
   }
 
+
   useEffect(() => {
     getMyAppointment(currentPage);
   }, [currentPage]);

@@ -46,6 +46,7 @@ export default function AdminAppointments() {
   const handlePageChange = (pages) => {
     setCurrentPage(pages);
   };
+
   return (
     <>
       <Helmet>
@@ -120,7 +121,7 @@ export default function AdminAppointments() {
                           {item.name}
                         </td>
                         <td className="py-2   border-gray-100  border-b-2  ">
-                          {item.doctorId.username}
+                          {item.doctorId?.username}
                         </td>
                         <td className="py-2   border-gray-100  border-b-2 ">
                           {item.phone}

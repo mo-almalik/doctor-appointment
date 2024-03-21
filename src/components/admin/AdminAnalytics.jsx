@@ -10,7 +10,7 @@ import {
 import { useError } from "../../Context/error.js";
 import ErrorPage from "../../utils/ErrorPage.jsx";
 import api from "../../services/api.js";
-
+ 
 export default function AdminAnalytics() {
   const { handleError } = useError();
   const [loading, setLoading] = useState(false);
@@ -125,7 +125,9 @@ export default function AdminAnalytics() {
         </div>
       </div>
 
-      <div className="w-full h-80 bg-white rounded-md"></div>
+      <div className="w-full h-80 bg-white rounded-md">
+        AdminChart  
+      </div>
     </>
   );
 }

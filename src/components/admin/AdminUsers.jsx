@@ -80,7 +80,7 @@ export default function AdminUsers() {
                 <tr className="py-5 ">
                   <th className="py-5   border-gray-100"> #</th>
                   <th className="py-5  border-gray-100">اسم المستخدم</th>
-                  <th className="py-5 em:hidden sm:hidde  border-gray-100"> الايميل</th>
+                  <th className="py-5 em:hidden sm:hidde  border-gray-100"> البريد الالكتروني</th>
                   <th className="py-5 em:hidden sm:hidde border-gray-100"> رقم الهاتف</th>
                   <th className="py-5  border-gray-100"> صلاحيات</th>
 
