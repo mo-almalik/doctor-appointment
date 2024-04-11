@@ -56,9 +56,9 @@ export default function AdminAppointments() {
         <h3> الحجوزات</h3>
         {/* filter */}
         <div className="bg-white  my-2 rounded-md flex items-center justify-between em:flex-col sm:flex-col  gap-3 p-5">
-          <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm w-[20%] em:w-full sm:w-full">
+          {/* <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm w-[20%] em:w-full sm:w-full">
             اضافة حجز جديد
-          </button>
+          </button> */}
           <div className="">
             <form className="flex items-center em:flex-col sm:flex-col gap-3 ">
               <input

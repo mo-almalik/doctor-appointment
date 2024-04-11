@@ -8,8 +8,10 @@ import { toast } from 'react-toastify';
 
 import docForm from '../../Assets/image/Parents-pana.svg'
 import Navbar from '../../components/common/Navbar.jsx';
+import Loading from '../../utils/Loading.jsx';
 export default function Register() {
     const [error, setError] = useState(null);
+    const [loading ,setLoading] = useState(false)
 let navigate =  useNavigate();
     let user = {
         password: "",
@@ -39,15 +41,19 @@ let navigate =  useNavigate();
 
 
       async function  Registe(userData) {
+        setLoading(true)
         let data = await api.post("/auth/register", userData).catch((error) => {
           setError(error.response.data.message);
+          setLoading(false)
         });
         // Log the data from the response
-     if(data.status === 200) {
+        if(data.status === 200) {
+       
+
         toast.success('تم التسجيل بنجاح')
         setTimeout(()=>{
           navigate('/login')
-        },1500)
+        },1000)
      }
         
       }
@@ -137,7 +143,16 @@ let navigate =  useNavigate();
                 ""
               )}
 
+              {loading ? <>
               <button
+                className="bg-main  px-5 text-white w-1/2 mx-auto my-2 py-2 rounded-md cursor-pointer"
+                disabled={true}
+
+              >
+                <Loading />
+              </button>
+             </> : <>
+             <button
                 disabled={!(formik.isValid && formik.dirty)}
                 className="bg-main  px-5 text-white w-1/2 mx-auto my-2 py-2 rounded-md cursor-pointer"
                 type="submit"
@@ -145,6 +160,7 @@ let navigate =  useNavigate();
                 
                 انشاء الحساب
               </button>
+             </>}
             </form>
             <Link to="/register" className="text-gray-500 mt-2">
               
@@ -156,8 +172,3 @@ let navigate =  useNavigate();
 </>)
 }
 
-function DoctorRegister(){
-    return <>
-        hi doctor
-    </>
-}

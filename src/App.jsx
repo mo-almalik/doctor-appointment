@@ -18,7 +18,7 @@ import {DoctorRouter,UserRouter,AdminRouter} from './utils/ProtectedRouter.js';
 import UserAppointmentDetails from './components/user/UserAppointmentDetails.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getToken  } from './utils/auth.js';
+import { getToken, userRole  } from './utils/auth.js';
 import { useEffect } from 'react';
 import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
 import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
@@ -41,6 +41,7 @@ import AdmainNewDoctors from './components/admin/AdmainNewDoctors.jsx';
 import AdminBlocklist from './components/admin/AdminBlocklist.jsx';
 import AdminChart from './components/admin/AdminChart.jsx';
 import Register from './auth/Register/Register.jsx';
+import DoctorRegister from './components/doctor/auth/DoctorRegister.jsx';
 
 
 
@@ -53,6 +54,7 @@ let Routers =createBrowserRouter([
     {path:'profile',element:<UserRouter><UserProfile /></UserRouter>},
     {path:'contact' , element: <UserContact />},
     {path:'doctor/login' ,element:<DoctorLogin />},
+    {path:'doctor/register' ,element:<DoctorRegister />},
     {path:'doctorList' , element:  <UserDoctorList />},
     {path:'doctor/:id' ,element: <UserDoctorDetails />},
     {path:'all-appointment' ,element:<UserRouter><UserAppointment /></UserRouter>},
@@ -100,9 +102,8 @@ let Routers =createBrowserRouter([
   {path:"*",element:<NotFound />},
 ])
 function App() {
-useEffect(()=>{
-  getToken()
-},[])
+
+
 
   return<>
     <RouterProvider router={Routers}></RouterProvider>

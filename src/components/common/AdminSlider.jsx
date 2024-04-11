@@ -94,7 +94,7 @@ export default function AdminSlider() {
                   <TbUserStar className="size-4" /> الأطباء المميزين
                 </span>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to={"chart"}
                 className={({ isActive }) =>
                   isActive
@@ -106,7 +106,7 @@ export default function AdminSlider() {
                   
                   <TbChartDonut   className="size-4" />  الأحصائيات
                 </span>
-              </NavLink>
+              </NavLink> */}
 
               <NavLink
                 to={"Blocklist"}
@@ -121,7 +121,7 @@ export default function AdminSlider() {
                   <TbCircleMinus  className="size-4" /> قائمة الحظر
                 </span>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to={"accounting"}
                 className={({ isActive }) =>
                   isActive
@@ -133,9 +133,9 @@ export default function AdminSlider() {
                   
                   <TbBrandGoogleAnalytics className="size-4" /> اعلانات
                 </span>
-              </NavLink>
+              </NavLink> */}
 
-              <NavLink
+              {/* <NavLink
                 to={"settings"}
                 className={({ isActive }) =>
                   isActive
@@ -147,9 +147,9 @@ export default function AdminSlider() {
                   
                   <TbLayoutGrid className="size-4" /> الأعدادات
                 </span>
-              </NavLink>
+              </NavLink> */}
 
-              <NavLink
+              {/* <NavLink
                 to={"suport"}
                 className={({ isActive }) =>
                   isActive
@@ -161,7 +161,7 @@ export default function AdminSlider() {
                   
                   <TbHelpCircle className="size-4" /> الدعم الفني
                 </span>
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
         </div>

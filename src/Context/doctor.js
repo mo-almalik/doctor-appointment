@@ -46,7 +46,7 @@ async function GetDoctorData() {
     setDoctorInfo(data?.data.data.data)
     setDoctorcount(data?.data?.data.count)
     setDoctorMessage(data.data.data.message)
-
+console.log(data);
   setLoading(false)
 }
 

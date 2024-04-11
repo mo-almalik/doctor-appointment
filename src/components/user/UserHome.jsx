@@ -12,8 +12,6 @@ export default function UserHome() {
   GetDoctorsAds()
  },[])
   
-
- console.log(adsDoctor);
   return <>
   <Helmet>
     <title>عافية</title>

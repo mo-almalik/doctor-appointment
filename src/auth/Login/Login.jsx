@@ -5,9 +5,11 @@ import { saveAuthData, isAuthenticated, userRole } from "../../utils/auth.js";
 import api from "../../services/api.js";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/common/Navbar.jsx";
+import Loading from "../../utils/Loading.jsx";
 
 export default function Login() {
   const [error, setError] = useState(null);
+  const [loading ,setLoading] =useState(false)
   let navigate =  useNavigate();
   let user = {
     email: "",
@@ -27,19 +29,22 @@ export default function Login() {
   });
 
   async function Login(userData) {
+    setLoading(true)
     let { data } = await api.post("/auth/login", userData).catch((error) => {
       setError(error.response.data.message);
+      setLoading(false)
     });
     // Log the data from the response
-
+   
     if (data.success === true) {
+      setLoading(false)
       const token = 'Bearer ' +  data.token;
 
       saveAuthData(token);
    
       if (isAuthenticated()) {
-        const Role = user()
-        switch (Role.role) {
+        const Role = userRole()
+        switch (Role) {
           case 'admin':
             navigate('/admin');
             break;
@@ -116,14 +121,24 @@ export default function Login() {
                 ""
               )}
 
+             {loading ? <>
               <button
+                className="bg-main  px-5 text-white w-1/2 mx-auto my-2 py-2 rounded-md cursor-pointer"
+                disabled={true}
+
+              >
+                <Loading />
+              </button>
+             </> : <>
+             <button
                 disabled={!(formik.isValid && formik.dirty)}
-                className="bg-main  px-5 text-white w-1/2 mx-auto py-2 rounded-md"
+                className="bg-main  px-5 text-white w-1/2 mx-auto py-2 rounded-md cursor-pointer"
                 type="submit"
               >
                 
                 دخول
               </button>
+             </>}
             </form>
             <Link to="/register" className="text-gray-500 mt-2">
               

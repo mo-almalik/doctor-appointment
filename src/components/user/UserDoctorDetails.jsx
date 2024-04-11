@@ -4,14 +4,16 @@ import { useParams } from 'react-router-dom';
 import api from '../../services/api.js';
 import { Helmet } from 'react-helmet';
 import { TbLoader } from 'react-icons/tb';
-import UserReview from './Userreview.js';
 import getStarIcons from './Userreview.js';
+import { isAuthenticated, userRole } from '../../utils/auth.js';
+import AddReview from './AddReview.jsx';
 
 
 export default function UserDoctorDetails() {
   const [doctor ,setDoctor] = useState([])
   const [review ,setReview] = useState([])
 const [loading ,setLoading] = useState(false)
+const [reviewsUpdated, setReviewsUpdated] = useState(false);
   const { id } = useParams();
   const getData = async(id) =>{
     setLoading(true)
@@ -22,11 +24,15 @@ const [loading ,setLoading] = useState(false)
  
 
   }
-  useEffect(()=>{
-   
-    getData(id)
-    
-  },[])
+
+  const onReviewAdded = () => {
+    setReviewsUpdated(prev => !prev); // تغيير القيمة لتحفيز useEffect
+  };
+  
+  useEffect(() => {
+    getData(id);
+  }, [id, reviewsUpdated]); // إضافة reviewsUpdated كتبعية
+  
   
   return <>
   <Helmet>
@@ -67,6 +73,12 @@ const [loading ,setLoading] = useState(false)
           <div className='bg-white my-5 p-5 rounded-md '> 
            <h4>تقييم المرضي </h4>
              <div className='flex flex-col gap-4 w-full mt-5'>
+             {isAuthenticated() && userRole() === 'user' ? <>
+             <AddReview onReviewAdded={onReviewAdded} />
+
+           </>: <></>}
+
+
              {loading ? <>
             <TbLoader className='animate-spin' />
            </> : <>
@@ -80,6 +92,8 @@ const [loading ,setLoading] = useState(false)
            </div>
            )}
            </>}
+
+           
              </div>
           </div>
         </div>

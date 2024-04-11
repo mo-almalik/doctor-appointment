@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Link, useParams } from "react-router-dom";
 import api from "../../services/api.js";
 import { toast } from 'react-toastify';
-import { getToken, isAuthenticated, userRole } from "../../utils/auth.js";
+import {  getToken, isAuthenticated, userRole } from "../../utils/auth.js";
 import Loading from "../../utils/Loading.jsx";
 export default function 
 UserAddAppointment() {
@@ -71,9 +71,10 @@ UserAddAppointment() {
     Sunday: 'الأحد',
   };
   
-
+ 
   useEffect(()=>{
     getDays(id)
+    getToken()
   },[])
 
 

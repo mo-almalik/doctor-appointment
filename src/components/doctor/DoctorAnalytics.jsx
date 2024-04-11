@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+
 import {
   TbArrowNarrowLeft,
   TbBriefcaseFilled,
@@ -19,6 +20,9 @@ export default function DoctorAnalytics() {
     GetDoctorData()
   },[])
  const {appointmentCount ,patientCount ,totalAmount} = doctorcount
+
+ const options = {  maximumFractionDigits: 2   }   
+ const formattedNumber = Intl.NumberFormat("en-US",options).format(totalAmount); 
   return (
     <>
       {doctorMessage ? <>
@@ -86,7 +90,10 @@ export default function DoctorAnalytics() {
               <h6 className="text-gray-500 mx-3">الايرادات</h6>
             </div>
             
-            {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">{totalAmount} $</span> }  
+            {loading ?  <TbLoader className='animate-spin text-md ' /> : <span className="text-gray-900 font-bold">
+            $ 
+            {formattedNumber} 
+            </span> }  
 
             {/* <span className='text-red-500 flex items-center'>20 -<TbSquareRoundedArrowUpFilled className='w-5 h-5 ms-1 rotate-180' /></span> */}
           </div>

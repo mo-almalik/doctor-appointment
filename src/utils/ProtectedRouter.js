@@ -1,28 +1,30 @@
 import React from 'react'
 import {  Navigate } from 'react-router-dom';
-import {  isAuthenticated, user } from './auth.js';
+import {  isAuthenticated,  userRole } from './auth.js';
 import NotFound from '../components/common/NotFound.jsx';
 
 
 
-const Role = user()
+const Role = userRole()
 
 
 
 
   function UserRouter(props) {
-    if(isAuthenticated() && Role.role === 'user'){
+    if(isAuthenticated() && Role === 'user'){
         
         return props.children
     }else{
-        return <Navigate to={'/'}/>
+         <Navigate to={'/'}/>
 
     }
 
 }
  function AdminRouter(props) {
-    if(isAuthenticated() && Role.role === 'admin'){
+    if(isAuthenticated() && Role === 'admin'){
+        <Navigate to={'/admin'}/>
         return props.children
+        
     }else{
         return <NotFound/>
 
@@ -30,7 +32,7 @@ const Role = user()
 }
 
  function DoctorRouter(props) {
-    if(isAuthenticated() && Role.role === 'doctor'){
+    if(isAuthenticated() && Role === 'doctor'){
         return props.children
     }else{
         return <NotFound/>
