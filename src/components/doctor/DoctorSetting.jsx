@@ -3,11 +3,12 @@ import DoctorUpdateAccount from './DoctorUpdateAccount.jsx';
 import DoctorAppointmentSetting from './DoctorAppointmentSetting.jsx';
 import DoctorPasswordChenge from './DoctorPasswordChenge.jsx';
 import { DoctorContext} from '../../Context/doctor.js';
+import DoctorReviews from './DoctorReviews.jsx';
 
 
 const AccountSection = () => <div><DoctorUpdateAccount/> </div>;
 const SettingsSection = () => <div><DoctorAppointmentSetting /> </div>;
-const ReviewsSection = () => <div>محتوى التقييمات</div>;
+const ReviewsSection = () => <div> <DoctorReviews />  </div>;
 const PasswordChange = () => <div> <DoctorPasswordChenge /> </div>;
 export default function DoctorSetting() {
   const {doctorInfo,loading,GetDoctorData} =useContext(DoctorContext);
@@ -60,8 +61,10 @@ export default function DoctorSetting() {
      
     <div className='flex justify-around items-center bg-white  p-4 rounded-md em:flex-col  em:space-y-4'>
     {Object.keys(sections).map((section, index) => (
-        <button  key={index} onClick={() => handleSectionClick(section)} >
+        <button key={index} onClick={() => handleSectionClick(section)} >
+          
           {section}
+         
         </button>
       ))}
     </div>

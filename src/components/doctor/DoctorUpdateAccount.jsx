@@ -92,7 +92,7 @@ const handeleDeleteAccount = async()=>{
       </div>
       <div className="my-4">
         <label htmlFor="DOB" className="text-gray-700 ">
-          تاريخ الملاد
+          تاريخ الميلاد
         </label>
         <input
           onBlur={formik.handleBlur}
