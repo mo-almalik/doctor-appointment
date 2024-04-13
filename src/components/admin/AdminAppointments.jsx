@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import Loading from "../../utils/Loading.jsx";
 import Pagination from "../../utils/Pagination.jsx";
 import api from "../../services/api.js";
@@ -11,12 +12,13 @@ export default function AdminAppointments() {
   const [totalPages, setTotalPages] = useState(1);
   const [appointment, setAppointment] = useState([]);
 
+
   const gender = {
     female: "انثي",
     mail: "ذكر",
   };
 
-  const status = {
+  const statusAr = {
     pending: "انتظار",
     confirmed: "ماكد",
     canceled: "ملغي",
@@ -47,6 +49,49 @@ export default function AdminAppointments() {
     setCurrentPage(pages);
   };
 
+
+  const initialValues = {
+    visitNo: '',
+    phone: '',
+    status: '',
+  }
+  const validationSchema = Yup.object({
+    visitNo: Yup.string(),
+    phone: Yup.string(),
+    status: Yup.string(),
+  })
+  let formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      filter(values);
+    }
+
+  });
+
+ 
+
+  async function filter(values) {
+    setLoading(true);
+    try {
+      const queryString = Object.keys(values)
+        .filter(key => values[key] !== '') // Filter out empty strings to avoid unnecessary query parameters
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
+        .join('&');
+
+      const res = await api.get(`/appointment/filter?${queryString}`);
+      if (res.status === 200) {
+        setAppointment(res.data?.data.docs);
+        setTotalPages(res.data.data.totalPages);
+      } else {
+        // Handle other status codes or error situations
+        console.error('Failed to fetch data:', res.status);
+      }
+    } catch (e) {
+      console.error('Failed to fetch data:', e);
+    }
+    setLoading(false);
+  }
   return (
     <>
       <Helmet>
@@ -60,27 +105,36 @@ export default function AdminAppointments() {
             اضافة حجز جديد
           </button> */}
           <div className="">
-            <form className="flex items-center em:flex-col sm:flex-col gap-3 ">
-              <input
-                placeholder="اسم الطبيب"
-                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
-              />
-              <input
-                placeholder="اسم المريض"
-                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
-              />
+            <form className="flex items-center em:flex-col sm:flex-col gap-3 " onSubmit={formik.handleSubmit}>
+
               <input
                 placeholder="رقم التزكرة "
                 className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="text"
+                name="visitNo"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              <input
+                placeholder="رقم الهاتف "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="text"
+                name="phone"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
               />
 
-              <select className="p-2 border-gray-200 border rounded-md text-sm text-gray-400 px-4 outline-none w-full">
+
+              <select className="p-2 border-gray-200 border rounded-md text-sm text-gray-400 px-4 outline-none w-full"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                id="status"  >
                 <option disabled>الحالة</option>
-                <option className="my-3">انتظار</option>
-                <option className="my-3">مأكد</option>
-                <option className="my-3">ملغي</option>
+                <option className="my-3" value={'pending'}>انتظار</option>
+                <option className="my-3" value={'confirmed'}>مأكد</option>
+                <option className="my-3" value={'canceled'}>ملغي</option>
               </select>
-              <button className="mx-2 bg-main text-white  w-28 rounded-md p-2">
+              <button className="mx-2 bg-main text-white  w-28 rounded-md p-2" type='submit'>
                 بحث
               </button>
             </form>
@@ -104,13 +158,14 @@ export default function AdminAppointments() {
                   <th className="py-5  border-gray-100"> رقم الهاتف</th>
                   <th className="py-5   border-gray-100"> النوع</th>
                   <th className="py-5   border-gray-100"> تاريخ الحجز</th>
+                  <th className="py-5   border-gray-100">  رقم التزكرة</th>
                   <th className="py-5   border-gray-100"> حالة الطلب</th>
-                
+
                 </tr>
               </thead>
 
               <tbody className="text-sm">
-                {appointment ? (
+                {appointment ? 
                   <>
                     {appointment.map((item, index) => (
                       <tr key={index} className="duration-200 ">
@@ -137,22 +192,22 @@ export default function AdminAppointments() {
                             timeZone: "UTC",
                           })}
                         </td>
-
+                        <td className="py-2   border-gray-100  border-b-2 ">
+                          {item.visitNo}
+                        </td>
                         <td className="py-2  border-gray-100  border-b-2   ">
                           <span
                             className={` rounded-full px-5 text-[12px] p-2 ${statusColors[item.status]
                               }`}
                           >
-                            {status[item.status]}
+                            {statusAr[item.status]}
                           </span>
                         </td>
-                        
+
                       </tr>
-                    ))}
+                    )) } 
                   </>
-                ) : (
-                  <h6>لاتوجد حجوزات</h6>
-                )}
+                 : <><span>لاتوجد حجوزات</span></>}
               </tbody>
             </table>
             {appointment && appointment.length > 0 ? (
