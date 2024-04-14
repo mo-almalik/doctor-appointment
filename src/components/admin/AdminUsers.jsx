@@ -5,7 +5,8 @@ import { TbArrowLeft } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
 import Pagination from "../../utils/Pagination.jsx";
 import api from "../../services/api.js";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 export default function AdminUsers() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +36,54 @@ export default function AdminUsers() {
     getAllusers(currentPage);
   }, [currentPage]);
 
+
+
+
+  const initialValues = {
+    username: '',
+    phone: '',
+    email: '',
+    role: '',
+  }
+  const validationSchema = Yup.object({
+    username: Yup.string(),
+    phone: Yup.string(),
+    email: Yup.string(),
+    role: Yup.string(),
+  })
+  let formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      filter(values);
+    }
+
+  });
+
+ 
+
+  async function filter(values) {
+   
+    setLoading(true);
+    try {
+      const queryString = Object.keys(values)
+        .filter(key => values[key] !== '') // Filter out empty strings to avoid unnecessary query parameters
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
+        .join('&');
+
+      const res = await api.get(`/admin/users/filter?${queryString}`);
+      if (res.status === 200) {
+        setUsers(res.data?.data.docs);
+        setTotalPages(res.data.data.totalPages);
+      } else {
+        // Handle other status codes or error situations
+        console.error('Failed to fetch data:', res.status);
+      }
+    } catch (e) {
+      console.error('Failed to fetch data:', e);
+    }
+    setLoading(false);
+  }
   return (
     <>
       {shouldDisplayTitle && (
@@ -56,13 +105,52 @@ export default function AdminUsers() {
                 اضافة مستخدم
               </button>
             </div>
-            <div className="flex gap-2">
-              <select className="h-10 rounded-md my-2 px-5 text-gray-500">
-                <option disabled>صلاحيات</option>
-                <option>user</option>
-                <option>admin</option>
-                <option>all</option>
+            <div className=" bg-white  my-2 rounded-md flex items-center justify-between em:flex-col sm:flex-col  p-5 gap-2 w-full">
+            <div className="w-full">
+            <form className="flex items-center em:flex-col sm:flex-col gap-3 " onSubmit={formik.handleSubmit}>
+
+              <input
+                placeholder="اسم المستخدم "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="text"
+                name="username"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              <input
+                placeholder="ايميل "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="email"
+                name="email"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              
+              <input
+                placeholder="رقم الهاتف "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="tel"
+                name="phone"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+
+
+              <select className="p-2 border-gray-200 border rounded-md text-sm text-gray-400 px-4 outline-none w-full"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                id="role" name="role" >
+                <option disabled>الحالة</option>
+                <option className="my-3" value={'user'}>user</option>
+                <option className="my-3" value={'admin'}>admin</option>
+                <option className="my-3" value={''}>all</option>
               </select>
+              <button className="mx-2 bg-main text-white  w-28 rounded-md p-2" type='submit'>
+                بحث
+              </button>
+            </form>
+          </div>
+
             </div>
           </>
         )}

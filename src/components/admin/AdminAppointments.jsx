@@ -104,7 +104,7 @@ export default function AdminAppointments() {
           {/* <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm w-[20%] em:w-full sm:w-full">
             اضافة حجز جديد
           </button> */}
-          <div className="">
+          <div className="w-full">
             <form className="flex items-center em:flex-col sm:flex-col gap-3 " onSubmit={formik.handleSubmit}>
 
               <input

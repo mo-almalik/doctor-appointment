@@ -118,7 +118,7 @@ export default function AdminAnalytics() {
             ) : (
               <>
                 <span className="text-gray-900 font-bold">
-                  {counts?.price ? <> 500</> : <>2000</>}
+                 0
                 </span>
               </>
             )}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import Loading from "../../utils/Loading.jsx";
 import { TbArrowLeft } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
@@ -34,7 +35,51 @@ export default function AdminDocrots() {
     getAllDocotrs(currentPage);
   }, [currentPage]);
 
+  const initialValues = {
+    username: '',
+    phone: '',
+    email: '',
+
+  }
+  const validationSchema = Yup.object({
+    username: Yup.string(),
+    phone: Yup.string(),
+    email: Yup.string(),
+   
+  })
+  let formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      filter(values);
+    }
+
+  });
+
  
+
+  async function filter(values) {
+   
+    setLoading(true);
+    try {
+      const queryString = Object.keys(values)
+        .filter(key => values[key] !== '') // Filter out empty strings to avoid unnecessary query parameters
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
+        .join('&');
+
+      const res = await api.get(`/admin/doctors/filter?${queryString}`);
+      if (res.status === 200) {
+        setDoctors(res.data?.data.docs);
+        setTotalPages(res.data.data.totalPages);
+      } else {
+        // Handle other status codes or error situations
+        console.error('Failed to fetch data:', res.status);
+      }
+    } catch (e) {
+      console.error('Failed to fetch data:', e);
+    }
+    setLoading(false);
+  }
   return (
     <>
       {shouldDisplayTitle && (
@@ -52,10 +97,50 @@ export default function AdminDocrots() {
                 عرض كل الاطباء
               </p>
             </div>
+            <div className=" bg-white  my-2 rounded-md flex items-center justify-between em:flex-col sm:flex-col  p-5 gap-2 w-full">
+            <div className="w-full">
+            <form className="flex items-center em:flex-col sm:flex-col gap-3 " onSubmit={formik.handleSubmit}>
+
+              <input
+                placeholder="اسم الطبيب "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="text"
+                name="username"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              <input
+                placeholder="ايميل "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="email"
+                name="email"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              
+              <input
+                placeholder="رقم الهاتف "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="tel"
+                name="phone"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+
+
+              
+              <button className="mx-2 bg-main text-white  w-28 rounded-md p-2" type='submit'>
+                بحث
+              </button>
+            </form>
+          </div>
+
+            </div>
             
           </>
+          
         )}
-
+      
         {loading ? (
           <>
             <div className="w-full flex justify-center items-center text-3xl  text-center">

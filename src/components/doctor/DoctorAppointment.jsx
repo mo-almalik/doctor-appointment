@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api.js";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import {
   TbSquareRoundedMinus,
   TbSquareRoundedPlus,
@@ -77,7 +79,51 @@ export default function DoctorAppointment() {
   };
   
 
+  const initialValues = {
+    visitNo: '',
+    phone: '',
+    status: '',
+    name: '',
+  }
+  const validationSchema = Yup.object({
+    visitNo: Yup.string(),
+    phone: Yup.string(),
+    status: Yup.string(),
+    name: Yup.string(),
+  })
+  let formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      filter(values);
+    }
 
+  });
+
+ 
+
+  async function filter(values) {
+   
+    setLoading(true);
+    try {
+      const queryString = Object.keys(values)
+        .filter(key => values[key] !== '') // Filter out empty strings to avoid unnecessary query parameters
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
+        .join('&');
+
+      const res = await api.get(`/doctor/filter?${queryString}`);
+      if (res.status === 200) {
+        setAppointment(res.data?.data.docs);
+        setTotalPages(res.data.data.totalPages);
+      } else {
+        // Handle other status codes or error situations
+        console.error('Failed to fetch data:', res.status);
+      }
+    } catch (e) {
+      console.error('Failed to fetch data:', e);
+    }
+    setLoading(false);
+  }
   return (
     <>
        {shouldDisplayTitle && (
@@ -85,6 +131,65 @@ export default function DoctorAppointment() {
           <title>الحجوزات</title>
         </Helmet>
       )}
+
+{shouldDisplayTitle && ( <>
+              {/* filter */}
+              <div className="bg-white  my-2 rounded-md flex items-center justify-between em:flex-col sm:flex-col  gap-3 p-5">
+          {/* <button className="bg-main h-10 rounded-md my-2 px-5 text-white text-sm w-[20%] em:w-full sm:w-full">
+            اضافة حجز جديد
+          </button> */}
+          <div className="w-full">
+            <form className="flex items-center em:flex-col sm:flex-col gap-3 " onSubmit={formik.handleSubmit}>
+
+              <input
+                placeholder="رقم التزكرة "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="number"
+                name="visitNo"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              <input
+                placeholder="رقم الهاتف "
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="text"
+                name="phone"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+              <input
+                placeholder="اسم المريض"
+                className="border-gray-200 border rounded-md h-8 p-4 text-sm mx-2 outline-none w-full"
+                type="text"
+                name="name"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+              />
+
+
+              <select className="p-2 border-gray-200 border rounded-md text-sm text-gray-400 px-4 outline-none w-full"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                id="status"  >
+                <option disabled>الحالة</option>
+                <option className="my-3" value={'pending'}>انتظار</option>
+                <option className="my-3" value={'confirmed'}>مأكد</option>
+                <option className="my-3" value={'canceled'}>ملغي</option>
+              </select>
+              <button className="mx-2 bg-main text-white  w-28 rounded-md p-2" type='submit'>
+                بحث
+              </button>
+             
+            </form> 
+            <button onClick={()=>getMyAppointment()} className="mx-2  w-1/2   bg-main-500 text-white my-2 rounded-md p-2" type='submit'>
+                عرض الكل
+              </button>
+          </div>
+        </div>
+        {/* filter */}
+</>
+  
+)}
       <div className="w-full  text-center  rounded-md mx-auto mt-10 overflow-auto ">
         {loading ? (
           <>
