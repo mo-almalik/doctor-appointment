@@ -162,9 +162,9 @@ let navigate =  useNavigate();
               </button>
              </>}
             </form>
-            <Link to="/register" className="text-gray-500 mt-2">
+            <Link to="/login" className="text-gray-500 mt-2">
               
-              انشي حساب ؟
+                 تسجيل دخول
             </Link>
  </div>
 </div>

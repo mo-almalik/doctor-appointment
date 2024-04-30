@@ -18,8 +18,6 @@ import {DoctorRouter,UserRouter,AdminRouter} from './utils/ProtectedRouter.js';
 import UserAppointmentDetails from './components/user/UserAppointmentDetails.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getToken, userRole  } from './utils/auth.js';
-import { useEffect } from 'react';
 import DoctorLogin from './components/doctor/auth/DoctorLogin.jsx';
 import DoctorAppointment from './components/doctor/DoctorAppointment.jsx';
 import DoctorAccount from './components/doctor/DoctorAccount.jsx';
@@ -48,7 +46,7 @@ import DoctorRegister from './components/doctor/auth/DoctorRegister.jsx';
 
 let Routers =createBrowserRouter([
   // user routers
-  {path:'',element:<UserLayout /> ,children:[
+  {path:'/',element:<UserLayout /> ,children:[
     {index:true ,element:<UserHome />},
     {path:'about' ,element:<UserAbout />},
     {path:'profile',element:<UserRouter><UserProfile /></UserRouter>},

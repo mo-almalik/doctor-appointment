@@ -1,7 +1,9 @@
 import React from 'react'
 import {  Navigate } from 'react-router-dom';
 import {  isAuthenticated,  userRole } from './auth.js';
-import NotFound from '../components/common/NotFound.jsx';
+
+import AdminHome from '../components/admin/AdminHome.jsx';
+import DoctorHome from '../components/doctor/DoctorHome.jsx';
 
 
 
@@ -26,7 +28,7 @@ const Role = userRole()
         return props.children
         
     }else{
-        return <NotFound/>
+        return <AdminHome/>
 
     }
 }
@@ -35,7 +37,7 @@ const Role = userRole()
     if(isAuthenticated() && Role === 'doctor'){
         return props.children
     }else{
-        return <NotFound/>
+        return <DoctorHome/>
 
     }
 }
