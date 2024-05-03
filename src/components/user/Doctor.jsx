@@ -10,7 +10,7 @@ export default function Doctor() {
      GetDoctors()
     },[])
      
-   
+   console.log(doctors)
   
   return (
     <div>
@@ -30,7 +30,7 @@ export default function Doctor() {
             <div className='w-full carousel-item flex' key={item._id}>
             <Link to={`/doctor/${item._id}`} >
       <div className='h-fit bg-white  rounded-lg text-center p-5 mx-5'>
-       <img src={doct1} alt={item.username}  className='w-full rounded-lg'/>
+       <img src={item.profilePhoto ? item.profilePhoto : doct1 } alt={item.username}  className='w-full rounded-lg'/>
        <h4 className='py-3 text-gray-700'> {item.username}</h4>
         </div>
       </Link>

@@ -2,9 +2,6 @@ import React from 'react'
 import {  Navigate } from 'react-router-dom';
 import {  isAuthenticated,  userRole } from './auth.js';
 
-import AdminHome from '../components/admin/AdminHome.jsx';
-import DoctorHome from '../components/doctor/DoctorHome.jsx';
-
 
 
 const Role = userRole()
@@ -28,8 +25,7 @@ const Role = userRole()
         return props.children
         
     }else{
-        return <AdminHome/>
-
+        <Navigate to={'/'}/>
     }
 }
 
@@ -37,7 +33,7 @@ const Role = userRole()
     if(isAuthenticated() && Role === 'doctor'){
         return props.children
     }else{
-        return <DoctorHome/>
+        <Navigate to={'/'}/>
 
     }
 }

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 import { saveAuthData, isAuthenticated, userRole } from "../../utils/auth.js";
 import api from "../../services/api.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Navbar from "../../components/common/Navbar.jsx";
 import Loading from "../../utils/Loading.jsx";
 
@@ -65,14 +65,14 @@ export default function Login() {
     onSubmit: Login,
   });
 
-  
+
   return <>
     <Navbar />
     <div className="flex justify-center items-center container w-full mx-auto bg-gray-100 shadow-sm rounded-lg py-5 my-5 gap-4">
       {isAuthenticated() ? (
         <>
           <h6>انت بالفعل قم بتسجيل الدخول</h6>
-          <Link to="/">الرئيسية</Link>
+ 
         </>
       ) : (
         <>
