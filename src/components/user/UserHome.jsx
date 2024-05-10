@@ -32,7 +32,7 @@ export default function UserHome() {
           <div className='w-1/2 em:w-full sm:w-full'>
           <div className='flex  flex-col items-start justify-center px-10'>
           <form className='w-full'>
-            <input placeholder=' اكتب اسم الدكتور/المركز/ المستشفى هنا...' name='' className='w-full p-3 rounded-md focus:outline-none' />
+            <input placeholder=' اسم الدكتور .. ' name='' className='w-full p-3 rounded-md focus:outline-none' />
             <div className='grid grid-cols-2 my-3 gap-2 em:grid-cols-1'>
               <select className='w-full p-3 rounded-md focus:outline-none text-gray-400'>
                 <option defaultValue>المدينة</option>

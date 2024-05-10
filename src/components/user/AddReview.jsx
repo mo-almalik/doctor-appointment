@@ -54,6 +54,8 @@ export default function AddReview({onReviewAdded}) {
         } catch (error) {
            
            setError(error.response.data.message)
+
+           setLoading(false)
         }
     };
 

@@ -5,40 +5,32 @@ import SideBar from "../components/common/SideBar.jsx";
 import { TbArrowBadgeRight } from "react-icons/tb";
 
 export default function AdminLayout() {
-  const [open, setOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen); // تغيير حالة الشريط الجانبي عند النقر على الزر في الهيدر
+  };
 
   return (
-    <>
-      <div className="absolute z-50 right-[12%] em:right-[70%]">
-        <button
-          className={` mx-10 cursor-pointer  bg-main w-7 h-7 flex justify-center items-center rounded-md text-white    ${
-            !open && "rotate-180"
-          }  `}
-          onClick={() => setOpen(!open)}
-        >
-          <TbArrowBadgeRight className="text-white" />
-        </button>
-      </div>
+    <div className="w-full overflow-hidden h-screen">
+      <div className="flex overflow-hidden">
+        {/* شريط جانبي */}
+        <div className={`sidebar bg-white duration-300 ease-out  ${sidebarOpen ? 'w-[16%]' : 'w-0'}`}>
+          <SideBar />
+        </div>
 
-      <div className="flex w-full h-screen ">
-        <SideBar
-          className={`${
-            open
-              ? "w-[19%] duration-300  bg-white   h-screen overflow-y-auto scrollbar-thumb-mainlight  scrollbar-track-gray-100 scrollbar-thin relative em:absolute em:z-10 em:opacity-100 em:duration-200 em:w-[80%] "
-              : " w-0 duration-300 hidden transition"
-          } `}
-        />
-        
+        {/* المحتوى الرئيسي */}
+        <div className="h-screen bg-light w-full mx-auto overflow-y-auto scrollbar-thumb-gray-300 scrollbar-track-gray-100 scrollbar-thin overflow-x-hidden">
+          {/* الهيدر */}
+          <Header toggleSidebar={toggleSidebar} />
 
-        <div className="flex flex-col w-full  h-screen overflow-y-auto scrollbar-thin">
-          <div className=" mx-5  ">
-            <div className="">
-              <Header />
-            </div>
+          {/* المحتوى المركزي */}
+          <div className="container py-3 mx-auto ">
+            {/* Outlet من react-router-dom لعرض المكون الحالي */}
             <Outlet />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
