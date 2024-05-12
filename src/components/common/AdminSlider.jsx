@@ -1,12 +1,9 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
 import {
-  TbBrandGoogleAnalytics,
   TbCalendar,
-  TbChartDonut,
   TbCircleMinus,
   TbClock,
-  TbHelpCircle,
   TbLayoutGrid,
   TbUser,
   TbUserPlus,
@@ -14,8 +11,8 @@ import {
 } from "react-icons/tb";
 export default function AdminSlider() {
   return <>
-     <div className="flex flex-col justify-around my-5 text-sm">
-          <div className="">
+     <div className="flex flex-col justify-between  my-5 text-sm">
+          <div className=" ">
             <div className=" flex flex-col items-center text-md">
               <NavLink
                 to='/admin'
@@ -94,20 +91,6 @@ export default function AdminSlider() {
                   <TbUserStar className="size-4" /> الأطباء المميزين
                 </span>
               </NavLink>
-              {/* <NavLink
-                to={"chart"}
-                className={({ isActive }) =>
-                  isActive
-                    ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
-                    : "text-NavLink my-1.5 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
-                }
-              >
-                <span className="flex items-center gap-x-2">
-                  
-                  <TbChartDonut   className="size-4" />  الأحصائيات
-                </span>
-              </NavLink> */}
-
               <NavLink
                 to={"Blocklist"}
                 className={({ isActive }) =>
@@ -121,49 +104,11 @@ export default function AdminSlider() {
                   <TbCircleMinus  className="size-4" /> قائمة الحظر
                 </span>
               </NavLink>
-              {/* <NavLink
-                to={"accounting"}
-                className={({ isActive }) =>
-                  isActive
-                    ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
-                    : "text-NavLink my-1.5 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
-                }
-              >
-                <span className="flex items-center gap-x-2">
-                  
-                  <TbBrandGoogleAnalytics className="size-4" /> اعلانات
-                </span>
-              </NavLink> */}
 
-              {/* <NavLink
-                to={"settings"}
-                className={({ isActive }) =>
-                  isActive
-                    ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
-                    : "text-NavLink my-1.5 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
-                }
-              >
-                <span className="flex items-center gap-x-2">
-                  
-                  <TbLayoutGrid className="size-4" /> الأعدادات
-                </span>
-              </NavLink> */}
-
-              {/* <NavLink
-                to={"suport"}
-                className={({ isActive }) =>
-                  isActive
-                    ? " my-1.5 flex items-center gap-x-2 bg-main text-white py-2 rounded-md w-full px-5 duration-200 ease"
-                    : "text-NavLink my-1.5 flex items-center gap-x-2 hover:bg-main hover:text-white py-2 rounded-md w-full hover:px-5 duration-200 ease"
-                }
-              >
-                <span className="flex items-center gap-x-2">
-                  
-                  <TbHelpCircle className="size-4" /> الدعم الفني
-                </span>
-              </NavLink> */}
             </div>
           </div>
+
+
         </div>
   </>
 }

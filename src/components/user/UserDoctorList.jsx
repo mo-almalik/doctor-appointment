@@ -40,7 +40,7 @@ export default function UserDoctorList() {
       {doctors.slice(0,8).map((item ,index)=><Link to={`/doctor/${item._id}`} key={index} >
       <div className='h-fit bg-gray-300  rounded-lg text-center'>
         {loading ? loading : <>
-          <img src={item.profilePhoto ? item.profilePhoto : doct1 } alt={item.username}  className='w-full rounded-lg' />
+          <img src={item.profilePhoto.path ? item.profilePhoto.path : '' } alt={item.username}  className='w-full rounded-lg' />
         </>}
        <h4 className='py-3 text-gray-700'> {item.username}</h4>
         </div>

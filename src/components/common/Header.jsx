@@ -2,7 +2,7 @@ import React, { useEffect ,useState } from 'react'
 
 import { useAuth } from '../../Context/auth.js';
 import { Link, useNavigate } from 'react-router-dom';
-import { TbArrowBarLeft, TbMarquee2 } from 'react-icons/tb';
+import { TbAlignRight, TbArrowBarLeft, TbMarquee2 } from 'react-icons/tb';
 import { user } from '../../utils/auth.js';
 import { BiAlignJustify, BiBell } from 'react-icons/bi';
 
@@ -65,7 +65,7 @@ export default function Header({toggleSidebar }) {
      <div className='bg-white  border-b border-[#e5e7eb] w-full  top-0'>
       <div className='px-8 flex justify-between items-center h-[60px] leading-[60px]'>
         <div className='flex items-center justify-start gap-x-4 w-[15%]'> 
-        <BiAlignJustify className='size-5 text-gray-500 cursor-pointer' onClick={handleSidebarToggle}/>
+        <TbAlignRight  className='size-5 text-gray-500 cursor-pointer' onClick={handleSidebarToggle}/>
         <button onClick={()=>toggleFullscreen()} title='تكبير الشاشة'><TbMarquee2 className='text-[23px]' /></button>
         </div>
         <div className='flex justify-between items-center'>

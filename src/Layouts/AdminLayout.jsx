@@ -14,19 +14,18 @@ export default function AdminLayout() {
   return (
     <div className="w-full overflow-hidden h-screen">
       <div className="flex overflow-hidden">
-        {/* شريط جانبي */}
-        <div className={`sidebar bg-white duration-300 ease-out  ${sidebarOpen ? 'w-[16%]' : 'w-0'}`}>
+
+        <div className={`sidebar bg-white duration-300 ease-out  ${sidebarOpen ? 'w-[16%] ' : 'w-0'}`}>
           <SideBar />
         </div>
 
-        {/* المحتوى الرئيسي */}
+    
         <div className="h-screen bg-light w-full mx-auto overflow-y-auto scrollbar-thumb-gray-300 scrollbar-track-gray-100 scrollbar-thin overflow-x-hidden">
-          {/* الهيدر */}
+       
           <Header toggleSidebar={toggleSidebar} />
 
-          {/* المحتوى المركزي */}
           <div className="container py-3 mx-auto ">
-            {/* Outlet من react-router-dom لعرض المكون الحالي */}
+       
             <Outlet />
           </div>
         </div>

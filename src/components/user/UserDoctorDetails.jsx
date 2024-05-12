@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import UserAddAppointment from './UserAddAppointment.jsx'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api.js';
 import { Helmet } from 'react-helmet';
 import { TbLoader } from 'react-icons/tb';
 import getStarIcons from './Userreview.js';
 import { isAuthenticated, userRole } from '../../utils/auth.js';
 import AddReview from './AddReview.jsx';
+import NotFound from '../common/NotFound.jsx';
 
 
 export default function UserDoctorDetails() {
@@ -15,13 +16,19 @@ export default function UserDoctorDetails() {
 const [loading ,setLoading] = useState(false)
 const [reviewsUpdated, setReviewsUpdated] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate()
   const getData = async(id) =>{
-    setLoading(true)
-  const data = await api.get(`/doctor/info/${id}`).catch((error)=>console.log(error))
-   setDoctor(data.data.data?.info)
-  setReview(data.data.data?.review)
-  setLoading(false)
- 
+    try{
+      setLoading(true)
+      const data = await api.get(`/doctor/info/${id}`)
+       setDoctor(data.data.data?.info)
+      setReview(data.data.data?.review)
+      setLoading(false)
+     
+    }catch(e){
+     return navigate('/notfound')
+    }
+
 
   }
 
@@ -52,7 +59,7 @@ const [reviewsUpdated, setReviewsUpdated] = useState(false);
               <TbLoader className='animate-spin' />
             </> :<>
             <h3>د/ {doctor.username}</h3>
-            {doctor.status === 'online' ?  <span className='text-sm bg-green-200 bg-opacity-55 p-3 rounded-md text-green-700'>متصل الان</span> : ''}
+            {doctor.status === 'online' ?  <span className='text-sm bg-yellow-300 h-10 w-10 flex justify-center items-center p-3 rounded-md text-yellow-700'> 5</span> : ''}
             </>}
              
             </div>

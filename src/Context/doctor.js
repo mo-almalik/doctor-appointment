@@ -22,7 +22,7 @@ export function DoctorProvider({children}) {
   };
  async function UpdateInfo (DoctorData){
   setLoading(true)
-     await api.put('/doctor/update-profile',{
+     await api.patch('/doctor/update-profile',{
       ...DoctorData,
     }).catch((e)=>console.log(e.response.data.message));
     

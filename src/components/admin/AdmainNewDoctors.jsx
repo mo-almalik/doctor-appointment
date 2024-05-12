@@ -102,20 +102,20 @@ export default function AdmainNewDoctors() {
                     <td className="py-2   border-gray-100  border-b-2 ">
                       {item.username}
                     </td>
-                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde  border-gray-100  border-b-2  ">
+                    <td className="py-2 em:hidden  sm:hidde  border-gray-100  border-b-2  ">
                       {item.location ? item.location : "-"}
                     </td>
-                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde  border-gray-100  border-b-2 ">
+                    <td className="py-2 em:hidden  sm:hidde  border-gray-100  border-b-2 ">
                       {item.phone}
                     </td>
-                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde  border-gray-100  border-b-2 ">
+                    <td className="py-2 em:hidden  sm:hidde  border-gray-100  border-b-2 ">
                       {item.price ? item.price : "-"}
                     </td>
-                    <td className="py-2  em:hidden sm:hiddeem:hidden sm:hidde border-gray-100  border-b-2 ">
+                    <td className="py-2  em:hidden  sm:hidde border-gray-100  border-b-2 ">
                       {item.specialization}
                     </td>
 
-                    <td className="py-2 em:hidden sm:hiddeem:hidden sm:hidde border-gray-100  border-b-2   ">
+                    <td className="py-2 em:hidden  sm:hidde border-gray-100  border-b-2   ">
                       <span
                         className={`bg-opacity-50 rounded-md text-[12px] p-2 `}
                       >
