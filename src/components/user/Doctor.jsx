@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-
 import { DoctorContext } from '../../Context/doctor.js';
 import { Link } from 'react-router-dom';
-import doct1 from '../../Assets/image/doc2.jpg'
+
 export default function Doctor() {
   const { doctors, GetDoctors } = useContext(DoctorContext);
 
@@ -10,7 +9,7 @@ export default function Doctor() {
     GetDoctors()
   }, [])
 
-console.log(doctors)
+
   return (
     <div>
       {doctors && doctors.length > 0 ? <>

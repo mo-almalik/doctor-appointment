@@ -18,9 +18,9 @@ export default function UserDoctorList() {
      <div className='my-10 container m-auto '>
     <div className='grid grid-cols-4 gap-5 '>
       {doctors.slice(0,8).map((item ,index)=><Link to={`/doctor/${item._id}`} key={index} >
-      <div className='h-fit bg-gray-300  rounded-lg text-center'>
+      <div className='h-fit bg-gray-300  rounded-lg text-center p-3'>
         {loading ? loading : <>
-          <img src={item.profilePhoto.path ? item.profilePhoto.path : '' } alt={item.username}  className='w-full rounded-lg' />
+          <img src={item.profilePhoto.path ? item.profilePhoto.path : '' } alt={item.username}  className='w-full rounded-lg ' />
         </>}
        <h4 className='py-3 text-gray-700'> {item.username}</h4>
         </div>

@@ -11,8 +11,7 @@ const Role = userRole()
 
   function UserRouter(props) {
     if(isAuthenticated() && Role === 'user'){
-        
-        return props.children
+        return  <>{props.children}</>
     }else{
          <Navigate to={'/'}/>
 
@@ -21,16 +20,16 @@ const Role = userRole()
 }
  function AdminRouter(props) {
     if(isAuthenticated() && Role === 'admin'){
-        return props.children
+        return <>{props.children}</>
         
     }else{
-        <Navigate to={'/'}/>
+          <Navigate to={'/'}/>
     }
 }
 
  function DoctorRouter(props) {
     if(isAuthenticated() && Role === 'doctor'){
-        return props.children
+        return <>{props.children}</>
     }else{
         <Navigate to={'/'}/>
 
