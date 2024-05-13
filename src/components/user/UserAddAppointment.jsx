@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import {  getToken, isAuthenticated, userRole } from "../../utils/auth.js";
 import Loading from "../../utils/Loading.jsx";
 export default function 
-UserAddAppointment() {
+UserAddAppointment({price}) {
   const [error, setError] = useState(null);
   const [loading ,setLoading] = useState(false)
   const [available ,setAvailable] = useState([])
@@ -137,7 +137,7 @@ UserAddAppointment() {
             id="gender"
             className="w-full bg-gray-200  p-2 h-12 rounded-md my-2 focus:outline-none"
           >
-            <option value="mail">
+            <option value="mail" defaultValue={'mail'}>
               ذكر 
             </option>
             <option value="female">انثي</option>
@@ -180,8 +180,12 @@ UserAddAppointment() {
                  )}
                
                 </div>
-               
+             
               </>}
+             <div className="flex justify-between items-center my-5"> 
+             <h4>سعر المقابلة</h4>
+             <span className="font-semibold text-main">{price} - SAR</span>
+             </div>
         </div>
         {loading ? <>
           <button className="bg-main rounded-md text-white w-full p-4" >

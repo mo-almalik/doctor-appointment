@@ -59,7 +59,7 @@ const [reviewsUpdated, setReviewsUpdated] = useState(false);
               <TbLoader className='animate-spin' />
             </> :<>
             <h3>د/ {doctor.username}</h3>
-            {doctor.status === 'online' ?  <span className='text-sm bg-yellow-300 h-10 w-10 flex justify-center items-center p-3 rounded-md text-yellow-700'> 5</span> : ''}
+            {/* {doctor.status === 'online' ?  <span className='text-sm bg-yellow-300 h-10 w-10 flex justify-center items-center p-3 rounded-md text-yellow-700'> 5</span> : ''} */}
             </>}
              
             </div>
@@ -72,7 +72,7 @@ const [reviewsUpdated, setReviewsUpdated] = useState(false);
             <p className='text-gray-600'> {doctor.bio}</p>
             </>}
           </div>
-          <div className='bg-white my-5 p-5 rounded-md '> شركات التأمين</div>
+          {/* <div className='bg-white my-5 p-5 rounded-md '> شركات التأمين</div> */}
           
           
 
@@ -108,7 +108,7 @@ const [reviewsUpdated, setReviewsUpdated] = useState(false);
         
 
         <div className='w-[80%] em:w-full sm:w-full  py-5 bg-white p-6 rounded-md mt-5 h-fit'>
-          <UserAddAppointment />
+          <UserAddAppointment price={doctor.price} />
         </div>
 
       </div>
