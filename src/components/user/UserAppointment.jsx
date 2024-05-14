@@ -56,7 +56,7 @@ export default function UserAppointment() {
     getMyAppointment();
    
     },[])
-  
+  console.log(appointment);
   return <>
     
     <div className='container mx-auto text-center w-full h-full'>

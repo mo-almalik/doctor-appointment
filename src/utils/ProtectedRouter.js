@@ -6,32 +6,36 @@ import {  isAuthenticated,  userRole } from './auth.js';
 
 const Role = userRole()
 
+console.log('pro');
 
 
+  function UserRouter({children}) {
+    if(isAuthenticated() ){
+        if(Role === 'user'){
+             return  children
+            }
 
-  function UserRouter(props) {
-    if(isAuthenticated() && Role === 'user'){
-        return  <>{props.children}</>
-    }else{
+        else{
          <Navigate to={'/'}/>
 
+    }
     }
 
 }
  function AdminRouter(props) {
     if(isAuthenticated() && Role === 'admin'){
-        return <>{props.children}</>
+        return props.children
         
     }else{
-          <Navigate to={'/'}/>
+        return   <Navigate to={'/'}/>
     }
 }
 
  function DoctorRouter(props) {
     if(isAuthenticated() && Role === 'doctor'){
-        return <>{props.children}</>
+        return props.children
     }else{
-        <Navigate to={'/'}/>
+     return  <Navigate to={'/'}/>
 
     }
 }
