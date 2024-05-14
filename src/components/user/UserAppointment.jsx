@@ -18,16 +18,9 @@ export default function UserAppointment() {
   setLoading(false)
  }catch(e){
   setLoading(false)
-  return  setError('هنالك خطأ')
+  return  e
  }
   }
-
-
-  useEffect(()=>{
-    
-  getMyAppointment();
- 
-  },[])
 
   const status ={
     'pending' : 'انتظار',
@@ -41,7 +34,29 @@ export default function UserAppointment() {
   };
 
 
-  console.log(appointment);
+  async function updateAppointment(id){
+    try{
+      setLoading(true)
+      await api.put(`/user/appointment/${id}`).catch((err)=>  err);
+      
+      getMyAppointment();
+
+      setLoading(false)
+    
+     }catch(e){
+      setLoading(false)
+      return  e
+     }
+  }
+ 
+  
+
+  useEffect(()=>{
+    
+    getMyAppointment();
+   
+    },[])
+  
   return <>
     
     <div className='container mx-auto text-center w-full h-full'>
@@ -80,6 +95,9 @@ export default function UserAppointment() {
  <span className={`bg-opacity-50 rounded-md text-[12px] p-2 ${statusColors[item.status]}`}>{status[item.status]}</span>
  </div>
 
+ {item.status === 'canceled' ? null : <>
+ <button onClick={()=>updateAppointment(item._id)}>الغاء</button>
+ </>}
 </div>
  )}
     </>}

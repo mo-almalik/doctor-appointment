@@ -3,14 +3,14 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 import { saveAuthData, isAuthenticated, userRole } from "../../utils/auth.js";
 import api from "../../services/api.js";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import Navbar from "../../components/common/Navbar.jsx";
 import Loading from "../../utils/Loading.jsx";
 
 export default function Login() {
   const [error, setError] = useState(null);
-  const [loading ,setLoading] =useState(false)
-  let navigate =  useNavigate();
+  const [loading, setLoading] = useState(false)
+  let navigate = useNavigate();
   let user = {
     email: "",
     password: "",
@@ -35,15 +35,16 @@ export default function Login() {
       setLoading(false)
     });
     // Log the data from the response
-   
+
     if (data.success === true) {
       setLoading(false)
-      const token = 'Bearer ' +  data.token;
+      const token = 'Bearer ' + data.token;
 
       saveAuthData(token);
-   
+
       if (isAuthenticated()) {
         const Role = userRole()
+
         switch (Role) {
           case 'admin':
             navigate('/admin');
@@ -51,9 +52,10 @@ export default function Login() {
           case 'user':
             navigate('/');
             break;
-         
+
           default:
-         
+
+
         }
       }
     }
@@ -72,7 +74,7 @@ export default function Login() {
       {isAuthenticated() ? (
         <>
           <h6>انت بالفعل قم بتسجيل الدخول</h6>
- 
+
         </>
       ) : (
         <>
@@ -81,7 +83,7 @@ export default function Login() {
             <p className="text-gray-400 mt-2">اهلا بك </p>
             {error !== null ? (
               <div className="bg-red-400 text-white my-2 rounded-md  px-2">
-                
+
                 <i className="fa-solid fa-exclamation mx-2 errorLogin"></i>
                 {error}
               </div>
@@ -121,32 +123,32 @@ export default function Login() {
                 ""
               )}
 
-             {loading ? <>
-              <button
-                className="bg-main  px-5 text-white w-1/2 mx-auto my-2 py-2 rounded-md cursor-pointer"
-                disabled={true}
+              {loading ? <>
+                <button
+                  className="bg-main  px-5 text-white w-1/2 mx-auto my-2 py-2 rounded-md cursor-pointer"
+                  disabled={true}
 
-              >
-                <Loading />
-              </button>
-             </> : <>
-             <button
-                disabled={!(formik.isValid && formik.dirty)}
-                className="bg-main  px-5 text-white w-1/2 mx-auto py-2 rounded-md cursor-pointer"
-                type="submit"
-              >
-                
-                دخول
-              </button>
-             </>}
+                >
+                  <Loading />
+                </button>
+              </> : <>
+                <button
+                  disabled={!(formik.isValid && formik.dirty)}
+                  className="bg-main  px-5 text-white w-1/2 mx-auto py-2 rounded-md cursor-pointer"
+                  type="submit"
+                >
+
+                  دخول
+                </button>
+              </>}
             </form>
             <Link to="/register" className="text-gray-500 mt-2">
-              
+
               انشي حساب ؟
             </Link>
           </div>
         </>
       )}
     </div>
-    </>;
+  </>;
 }

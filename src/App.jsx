@@ -40,6 +40,7 @@ import AdminBlocklist from './components/admin/AdminBlocklist.jsx';
 import AdminChart from './components/admin/AdminChart.jsx';
 import Register from './auth/Register/Register.jsx';
 import DoctorRegister from './components/doctor/auth/DoctorRegister.jsx';
+import UpdateProfile from './components/user/UpdateProfile.jsx';
 
 
 
@@ -57,6 +58,7 @@ let Routers =createBrowserRouter([
     {path:'doctor/:id' ,element: <UserDoctorDetails />},
     {path:'all-appointment' ,element:<UserRouter><UserAppointment /></UserRouter>},
     {path:'appointment/:id' ,element:<UserRouter><UserAppointmentDetails /></UserRouter>},
+    {path:'profile/update' ,element:<UserRouter><UpdateProfile /></UserRouter>},
 
     
   ]},
